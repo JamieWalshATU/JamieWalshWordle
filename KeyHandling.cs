@@ -14,6 +14,8 @@ namespace Project2A
     {
         public event Action<string> KeyClickedEvent;
 
+        public Label EntryLabel { get; set; }
+
         string enteredWord = "";
         public void OnKeyClicked(object sender, EventArgs e)
         {
@@ -36,12 +38,14 @@ namespace Project2A
                     {
                        enteredWord = enteredWord.Remove(enteredWord.Length - 1);
                        Debug.WriteLine($"Entered Word:{enteredWord}");
+                        EntryLabel.Text = enteredWord;
                     }
                 }
                 else // Any Key Pressed
                 {
                     enteredWord += key;
                     Debug.WriteLine($"Entered Word:{ enteredWord }");
+                    EntryLabel.Text = enteredWord;
                 }
                     
             }

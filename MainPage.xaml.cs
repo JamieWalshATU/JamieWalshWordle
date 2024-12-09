@@ -20,7 +20,11 @@ namespace Project2A
         {
             InitializeComponent();
 
-            keyHandling = new KeyHandling();
+            keyHandling = new KeyHandling
+            {
+                EntryLabel = EntryLabel
+            };
+
             keyHandling.KeyClickedEvent += GuessSubmission;
 
             HttpClient client = new HttpClient();
