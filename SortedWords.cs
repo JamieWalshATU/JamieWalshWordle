@@ -12,6 +12,15 @@ namespace Project2A
             get => _wordListSorted;
             set => _wordListSorted = value;
         }
+        private static SortedWords _instance;
+        public static SortedWords GetInstance(WordViewModel wordViewModel)
+        {
+            if (_instance == null)
+            {
+                _instance = new SortedWords(wordViewModel);
+            }
+            return _instance;
+        }
 
         private readonly WordViewModel _wordViewModel;
 
@@ -47,6 +56,10 @@ namespace Project2A
             {
                 Debug.WriteLine("WordList is empty or null.");
             }
+        }
+        public bool Remove(string word)
+        {
+            return WordListSorted.Remove(word); // Removes the word from the list
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Project2A
 
             HttpClient client = new HttpClient();
             wordViewModel = new WordViewModel(client);
-            sortedWords = new SortedWords(wordViewModel);//Sorted list of 30 words
+            sortedWords = SortedWords.GetInstance(wordViewModel); // Use singleton instance of Sorted Words
             wordGrid = this.wordGrid; // Grid that displays guesses
         }
 
@@ -80,15 +80,11 @@ namespace Project2A
         private async Task<string> GetSelectedWord()
         {
             selectedWord = await GameStateSerializer.LoadSelectedWordAsync();
-            if (selectedWord.Length > 5 )
-            {
-                selectedWord = GetRandomWord();
-            }
-            if (string.IsNullOrEmpty(selectedWord)) //CHecks if there is a valid selected word, if not it creates one
+            if (string.IsNullOrEmpty(selectedWord) || !sortedWords.WordListSorted.Contains(selectedWord))
             {
                 selectedWord = GetRandomWord();
                 await GameStateSerializer.SaveSelectedWordAsync(selectedWord);
-            } //Saves selected word
+            }
             return selectedWord;
         }
         //method for fetching a random word
@@ -191,6 +187,7 @@ namespace Project2A
                 await player.CreateAudioPlayer("LevelPassed.mp3");
                 await player.PlayAudio();
                 await DisplayAlert("Correct Word Guessed!", "You have guessed the correct word, press continue to move on to the next word", "Continue");
+                RemoveWordFromList();
                 await RestartGame();
             }
             else if (guesses == 6) // if all guesses are used up
@@ -272,6 +269,18 @@ namespace Project2A
         private void OnKeyClicked(object sender, EventArgs e)
         {
             keyHandling.OnKeyClicked(sender, e);
+        }
+
+        private async void RemoveWordFromList()
+        {
+            if (sortedWords.Remove(selectedWord)) // Remove word from shared list
+            {
+                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}");
+            }
+            else
+            {
+                Debug.WriteLine($"Word '{selectedWord}' not found in list.");
+            }
         }
     }
 }

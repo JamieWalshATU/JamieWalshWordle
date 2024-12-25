@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\wordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:wordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\keyhandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:keyhandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\sortedwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:sortedwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\keyhandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:keyhandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\wordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:wordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\matte\\onedrive - atlantic tu\\courses\\second year\\cross-platfrom application development\\project2\\project2a\\audioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,30 +42,31 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "SortedWords.cs",
               "DocumentMoniker": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\SortedWords.cs",
               "RelativeDocumentMoniker": "SortedWords.cs",
               "ToolTip": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\SortedWords.cs",
               "RelativeToolTip": "SortedWords.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAwwC8AAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-25T19:04:34.087Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "WordViewModel.cs",
               "DocumentMoniker": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\WordViewModel.cs",
               "RelativeDocumentMoniker": "WordViewModel.cs",
               "ToolTip": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\WordViewModel.cs",
               "RelativeToolTip": "WordViewModel.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAwwCoAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAkwAgAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T11:52:49.46Z",
               "IsPinned": true,
@@ -73,15 +74,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "MainPage.xaml.cs",
               "ToolTip": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\MainPage.xaml.cs",
               "RelativeToolTip": "MainPage.xaml.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwB8AAABrAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T14:27:41.332Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\MainPage.xaml",
+              "RelativeDocumentMoniker": "MainPage.xaml",
+              "ToolTip": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\MainPage.xaml",
+              "RelativeToolTip": "MainPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-25T17:24:47.896Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -91,7 +106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "KeyHandling.cs",
               "DocumentMoniker": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\KeyHandling.cs",
               "RelativeDocumentMoniker": "KeyHandling.cs",
@@ -104,13 +119,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "GameStateSerializer.cs",
               "DocumentMoniker": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\GameStateSerializer.cs",
               "RelativeDocumentMoniker": "GameStateSerializer.cs",
               "ToolTip": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\GameStateSerializer.cs",
               "RelativeToolTip": "GameStateSerializer.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAiwCwAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T11:34:10.336Z",
               "EditorCaption": ""
@@ -138,18 +153,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T10:39:57.136Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MainPage.xaml",
-              "DocumentMoniker": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\MainPage.xaml",
-              "RelativeDocumentMoniker": "MainPage.xaml",
-              "ToolTip": "C:\\Users\\matte\\OneDrive - Atlantic TU\\Courses\\Second Year\\Cross-Platfrom Application Development\\Project2\\Project2A\\MainPage.xaml",
-              "RelativeToolTip": "MainPage.xaml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACcAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-25T17:24:47.896Z"
             }
           ]
         }

@@ -37,7 +37,11 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </Frame>
-            <Label x:Name="EntryLabel"></Label>
+
+            <Frame BorderColor="Gray"
+       CornerRadius="10">
+                <Label x:Name="EntryLabel" HorizontalOptions="Center" TextDecorations="Underline"></Label>
+            </Frame>
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                     <Button Text="Q" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
                     <Button Text="W" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
