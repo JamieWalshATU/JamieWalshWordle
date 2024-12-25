@@ -5,15 +5,26 @@ namespace Project2A
     public partial class MainPage : ContentPage
     {
         private KeyHandling keyHandling;
-        
         private WordViewModel wordViewModel;
         private SortedWords sortedWords;
-        private string selectedWord;         // Selected word is a random chosen word from the sorted list, this is the word the user must guess.
-        
+        private string selectedWord;   // Selected word is a random chosen word from the sorted list, this is the word the user must guess.
         public int guesses;
         List<string> guessEntries = new List<string>(); // List of all user-entries
-
+        List<string> correctGuesses = new List<string>(); // List of correct guesses
         private AudioPlayer player = new AudioPlayer(); //Audioplayer for sound
+        int roundNum;
+        private string roundNumString;
+        private int[][] historyGrid;
+
+        private int[][] CreateArray()
+        {
+            int[][] jaggedArray = new int[30][];
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                jaggedArray[i] = new int[6];
+            }
+            return jaggedArray;
+        }
 
         Grid grid;
         public MainPage()
@@ -31,6 +42,8 @@ namespace Project2A
             wordViewModel = new WordViewModel(client);
             sortedWords = SortedWords.GetInstance(wordViewModel); // Use singleton instance of Sorted Words
             wordGrid = this.wordGrid; // Grid that displays guesses
+
+            historyGrid = CreateArray();
         }
 
         private async Task InitializeGame()
@@ -53,17 +66,29 @@ namespace Project2A
             selectedWord = await GameStateSerializer.LoadSelectedWordAsync();
             Debug.WriteLine($"Selected word: {selectedWord}");
 
+            //Loads RoundNum
+            roundNumString = await GameStateSerializer.LoadRoundNumAsync();
+            roundNum = int.Parse(roundNumString);
+            Debug.WriteLine($"Round Number: {roundNum}");
+
             //Loads previous guesses
             await InitializeGuesses();
+
+            //Loads correct guesses
+            correctGuesses = await GameStateSerializer.LoadCorrectGuessesAsync();
+            Debug.WriteLine($"Correct Guesses: {correctGuesses.Count}");
+
+            //Loads History Grid
+            historyGrid = await GameStateSerializer.LoadHistoryArrAsync();
         }
-        
+
         //Creates a 6x5 Grid
         private void InitializeBlankGrid()
         {
             wordGrid.Children.Clear();
             wordGrid.RowDefinitions.Clear();
 
-            for (int row = 0; row < 6; row++)  
+            for (int row = 0; row < 6; row++)
             {
                 wordGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
@@ -131,6 +156,18 @@ namespace Project2A
         public async void CreateWord(String selectedWord, String guessedWord, Boolean loadingEntry)
         {
             Debug.WriteLine("createWord called with selectedWord: " + selectedWord);
+
+            if (string.IsNullOrEmpty(selectedWord))
+            {
+                selectedWord = await GetSelectedWord();
+                if (string.IsNullOrEmpty(selectedWord))
+                {
+                    Debug.WriteLine("Selected word is still null");
+                    selectedWord = "ERROR";
+                    return;
+                }
+            }
+
             selectedWord = selectedWord.ToUpper();
             string word = guessedWord.ToUpper();
 
@@ -155,10 +192,10 @@ namespace Project2A
                     if (existingFrame != null)
 
                         if (!loadingEntry)// if this is an actual user input, the game will play audio and delay to inputs to form an animation, if the game is just laoding up these functions are ignored
-                    {
-                        await player.PlayAudio();
-                        await Task.Delay(500);
-                    }
+                        {
+                            await player.PlayAudio();
+                            await Task.Delay(500);
+                        }
                 }
                 guesses++;
                 await HandleGuessResult(word, selectedWord);
@@ -182,27 +219,58 @@ namespace Project2A
 
         private async Task HandleGuessResult(string word, string selectedWord)
         {
+            if (word == "DEBUG")  // If user enters "DEBUG" in the game a seperate page is opened
+            {
+                await DisplayAlert("Debug Mode", "Entering debug menu...", "Continue");
+                await NavigateToDebugMenu();
+                return;
+            }
             if (CheckForWin(word, selectedWord)) // If word is correct
             {
+                correctGuesses.Add(word); // Add correct guess to the list
                 await player.CreateAudioPlayer("LevelPassed.mp3");
                 await player.PlayAudio();
                 await DisplayAlert("Correct Word Guessed!", "You have guessed the correct word, press continue to move on to the next word", "Continue");
                 RemoveWordFromList();
+                roundNum += 1;
+                await GameStateSerializer.SaveHistoryArrAsync(historyGrid);
+                await GameStateSerializer.SaveCorrectGuessesAsync(correctGuesses);
                 await RestartGame();
             }
             else if (guesses == 6) // if all guesses are used up
             {
                 await DisplayAlert("No Guesses Remaining", $"You have not guessed the correct word: {selectedWord}. Press continue to move on to the next word.", "Continue");
+                roundNum = 0;
+                ResetHistoryGrid();
+
                 await RestartGame();
             }
         }
+        private async Task NavigateToDebugMenu() //Navigates to the debug menu
+        {
+            // Navigate to the debug menu page
+            await Navigation.PushAsync(new DebugMenuPage());
+        }
+
+        private void ResetHistoryGrid() //Resets the history grid to 0 for every value
+        {
+            for (int i = 0; i < historyGrid.Length; i++)
+            {
+                for (int j = 0; j < historyGrid[i].Length; j++)
+                {
+                    historyGrid[i][j] = 0;
+                }
+            }
+        }
         //Clears entries and selects a new word
-        private async Task RestartGame()
+        public async Task RestartGame()
         {
             guessEntries.Clear();
             await GameStateSerializer.SaveEntriesAsync(guessEntries);
             selectedWord = GetRandomWord();
             await GameStateSerializer.SaveSelectedWordAsync(selectedWord);
+
+            await GameStateSerializer.SaveRoundNumAsync(roundNum.ToString());
             await InitializeGame();
         }
         //Checks if guessed word is the same as the selected word
@@ -235,22 +303,34 @@ namespace Project2A
 
         {
             Color bgColor;
-            if (letter == selectedWord[index])
+            Debug.WriteLine($"{index}");
+            if (index >= 0 && index < selectedWord.Length)
             {
-                bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
-                await player.CreateAudioPlayer("GreenLetter.mp3");
-            }
-            else if (selectedWord.Contains(letter))
-            {
-                bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
-                await player.CreateAudioPlayer("YellowLetter.mp3");
+                if (letter == selectedWord[index])
+                {
+                    bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
+                    await player.CreateAudioPlayer("GreenLetter.mp3");
+                    historyGrid[roundNum][index + 1] = 3; // 3 = Green for correct letter
+                }
+                else if (selectedWord.Contains(letter))
+                {
+                    bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
+                    await player.CreateAudioPlayer("YellowLetter.mp3");
+                    historyGrid[roundNum][index + 1] = 2; // 2 = Yellow for letter in word but wrong position
+                }
+                else
+                {
+                    bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
+                    await player.CreateAudioPlayer("GrayLetter.mp3");
+                    historyGrid[roundNum][index + 1] = 1; // 1 = Gray for incorrect letter
+                }
+                return bgColor;
             }
             else
             {
-                bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
-                await player.CreateAudioPlayer("GrayLetter.mp3");
+                return Color.FromArgb("#ecf7e6");
+                RestartGame();
             }
-            return bgColor;
         }
         //Handler for submitting a guess
         public async void GuessSubmission(string enteredWord)
@@ -262,6 +342,7 @@ namespace Project2A
                 {
                     guessEntries.Add(word);
                     await GameStateSerializer.SaveEntriesAsync(guessEntries);
+                    await GameStateSerializer.SaveHistoryArrAsync(historyGrid);
                 }
                 CreateWord(selectedWord, word, false);
             }
@@ -275,12 +356,16 @@ namespace Project2A
         {
             if (sortedWords.Remove(selectedWord)) // Remove word from shared list
             {
-                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}");
+                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}"); // If word is found in list
             }
             else
             {
-                Debug.WriteLine($"Word '{selectedWord}' not found in list.");
+                Debug.WriteLine($"Word '{selectedWord}' not found in list."); // If word is not found in list
             }
+        }
+        private async void OnPlayerHistoryButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PlayerHistory());
         }
     }
 }

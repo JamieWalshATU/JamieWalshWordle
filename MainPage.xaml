@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project2A.MainPage"
              xmlns:local="clr-namespace:Project2A">
-    
     <ScrollView>
         <VerticalStackLayout Padding="10">
             <Grid x:Name="topGrid" RowSpacing="10" ColumnSpacing="10" Padding="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -38,45 +37,62 @@
                 </Grid>
             </Frame>
 
-            <Frame BorderColor="Gray"
-       CornerRadius="10">
-                <Label x:Name="EntryLabel" HorizontalOptions="Center" TextDecorations="Underline"></Label>
-            </Frame>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+                <Button Text="L" WidthRequest="40" />
+                <Frame 
+        WidthRequest="120" 
+        HeightRequest="50" 
+        BorderColor="Gray" 
+        CornerRadius="10" 
+        Padding="0"
+        HorizontalOptions="Center" 
+        VerticalOptions="Center">
+                    <Grid>
+                        <Label 
+                x:Name="EntryLabel" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                FontSize="15" 
+                TextColor="Black" />
+                    </Grid>
+                </Frame>
+                <Button Text="R" WidthRequest="40" />
+            </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                    <Button Text="Q" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="W" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="E" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="R" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="T" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="Y" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="U" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="I" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="O" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="P" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
+                    <Button Text="Q" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="W" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="E" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="R" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="T" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="Y" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="U" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="I" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="O" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="P" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="20,0,0,0">
-                    <Button Text="A" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="S" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked"/>
-                    <Button Text="D" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked"/>
-                    <Button Text="F" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked"/>
-                    <Button Text="G" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="H" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="J" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="K" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="L" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="A" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="S" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button Text="D" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button Text="F" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button Text="G" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="H" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="J" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="K" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="L" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="50,0,0,0">
-                    <Button Text="Z" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="X" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="C" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="V" WidthRequest="40" HeightRequest="40"  Clicked="OnKeyClicked"/>
-                    <Button Text="B" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked"/>
-                    <Button Text="N" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked"/>
-                    <Button Text="M" WidthRequest="40" HeightRequest="40" Clicked="OnKeyClicked" />
-                    <Button Text="Delete" WidthRequest="80" HeightRequest="40" BackgroundColor="Red" TextColor="White" Clicked="OnKeyClicked" />
+                <Button Text="Z" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="X" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="C" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="V" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
+                <Button Text="B" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button Text="N" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button Text="M" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="Delete" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Red" TextColor="White" Clicked="OnKeyClicked" />
                 </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="10,0,0,0">
-                <Button Text="Enter" WidthRequest="80" HeightRequest="40" BackgroundColor="Green" TextColor="White" Clicked="OnKeyClicked" />
+                <Button Text="Enter" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Green" TextColor="White" Clicked="OnKeyClicked" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
