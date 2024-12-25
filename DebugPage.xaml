@@ -5,7 +5,5 @@
     <StackLayout Padding="20">
         <Label Text="Debug Menu" FontSize="24" HorizontalOptions="Center" />
         <Button Text="Reset Game Data" Command="{Binding ResetGameDataCommand}" />
-        <Button Text="Clear History Grid" Command="{Binding ClearHistoryGridCommand}" />
-        <Button Text="Reset Round Number" Command="{Binding ResetRoundNumberCommand}" />
     </StackLayout>
 </ContentPage>

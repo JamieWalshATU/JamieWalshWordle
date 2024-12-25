@@ -25,24 +25,30 @@ public partial class DebugMenuPage : ContentPage
     private async Task ResetGameData()
     {
         // Clear game data
-        await GameStateSerializer.SaveEntriesAsync(new List<string>());
-        await GameStateSerializer.SaveSelectedWordAsync(string.Empty);
-        await GameStateSerializer.SaveRoundNumAsync("0");
-        await GameStateSerializer.SaveHistoryArrAsync(new int[30][]);
+        GameState gameState = new GameState();
+        await GameStateSerializer.SaveGameStateAsync(gameState);
         await DisplayAlert("Reset Game Data", "Game data has been reset.", "OK");
     }
 
     private async Task ClearHistoryGrid()
     {
         // Clear history grid
-        await GameStateSerializer.SaveHistoryArrAsync(new int[30][]);
+        GameState gameState = await GameStateSerializer.LoadGameStateAsync();
+        gameState.HistoryArr = new int[30][];
+        for (int i = 0; i < gameState.HistoryArr.Length; i++)
+        {
+            gameState.HistoryArr[i] = new int[6];
+        }
+        await GameStateSerializer.SaveGameStateAsync(gameState);
         await DisplayAlert("Clear History Grid", "History grid has been cleared.", "OK");
     }
 
     private async Task ResetRoundNumber()
     {
         // Reset round number
-        await GameStateSerializer.SaveRoundNumAsync("0");
+        GameState gameState = await GameStateSerializer.LoadGameStateAsync();
+        gameState.RoundNumString = "0";
+        await GameStateSerializer.SaveGameStateAsync(gameState);
         await DisplayAlert("Reset Round Number", "Round number has been reset.", "OK");
     }
 }

@@ -14,9 +14,6 @@
     <MauiXaml Update="DebugPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="PlayerHistory.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">

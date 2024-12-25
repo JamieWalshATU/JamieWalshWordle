@@ -48,38 +48,64 @@ namespace Project2A
 
         private async Task InitializeGame()
         {
-            guesses = 0;
+            try
+            {
+                guesses = 0;
 
-            InitializeBlankGrid();
+                InitializeBlankGrid();
 
-            Debug.WriteLine("Initializing game...");
+                Debug.WriteLine("Initializing game...");
 
-            // Gets words from viewModel, sorts then binds them
-            await wordViewModel.GetWords();
-            Debug.WriteLine($"WordList has {wordViewModel.WordList.Count} words.");
+                // Gets words from viewModel, sorts then binds them
+                await wordViewModel.GetWords();
+                Debug.WriteLine($"WordList has {wordViewModel.WordList.Count} words.");
 
-            sortedWords.SortWords();
-            Debug.WriteLine($"Sorted words list has {sortedWords.WordListSorted.Count} words.");
-            BindingContext = sortedWords;
+                sortedWords.SortWords();
+                Debug.WriteLine($"Sorted words list has {sortedWords.WordListSorted.Count} words.");
+                BindingContext = sortedWords;
 
-            //  Loads saved selectedWord
-            selectedWord = await GameStateSerializer.LoadSelectedWordAsync();
-            Debug.WriteLine($"Selected word: {selectedWord}");
+                // Load game state
+                GameState gameState = await GameStateSerializer.LoadGameStateAsync();
 
-            //Loads RoundNum
-            roundNumString = await GameStateSerializer.LoadRoundNumAsync();
-            roundNum = int.Parse(roundNumString);
-            Debug.WriteLine($"Round Number: {roundNum}");
+                // Set game state
+                selectedWord = gameState.SelectedWord;
+                roundNumString = gameState.RoundNumString;
+                roundNum = int.Parse(roundNumString);
+                guessEntries = gameState.GuessEntries;
+                correctGuesses = gameState.CorrectGuesses;
+                historyGrid = gameState.HistoryArr;
 
-            //Loads previous guesses
-            await InitializeGuesses();
+                if (string.IsNullOrEmpty(selectedWord))
+                {
+                    selectedWord = GetRandomWord();
+                    gameState.SelectedWord = selectedWord;
+                    await SaveGameStateAsync();
+                }
+                Debug.WriteLine($"Selected word: {selectedWord}");
 
-            //Loads correct guesses
-            correctGuesses = await GameStateSerializer.LoadCorrectGuessesAsync();
-            Debug.WriteLine($"Correct Guesses: {correctGuesses.Count}");
+                // Initialize previous guesses
+                await InitializeGuesses();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error initializing game: {ex.Message}");
+                await DisplayAlert("Error", "An error occurred while initializing the game. Please try again.", "OK");
+                RestartGame();
+            }
+        }
 
-            //Loads History Grid
-            historyGrid = await GameStateSerializer.LoadHistoryArrAsync();
+        private async Task SaveGameStateAsync()
+        {
+            GameState gameState = new GameState
+            {
+                GuessEntries = guessEntries,
+                SelectedWord = selectedWord,
+                RoundNumString = roundNum.ToString(),
+                HistoryArr = historyGrid,
+                CorrectGuesses = correctGuesses
+            };
+
+            await GameStateSerializer.SaveGameStateAsync(gameState);
         }
 
         //Creates a 6x5 Grid
@@ -104,11 +130,12 @@ namespace Project2A
         }
         private async Task<string> GetSelectedWord()
         {
-            selectedWord = await GameStateSerializer.LoadSelectedWordAsync();
+            GameState gameState = await GameStateSerializer.LoadGameStateAsync();
+            selectedWord = gameState.SelectedWord;
             if (string.IsNullOrEmpty(selectedWord) || !sortedWords.WordListSorted.Contains(selectedWord))
             {
                 selectedWord = GetRandomWord();
-                await GameStateSerializer.SaveSelectedWordAsync(selectedWord);
+                await SaveGameStateAsync();
             }
             return selectedWord;
         }
@@ -124,13 +151,14 @@ namespace Project2A
             else
             {
                 Debug.WriteLine("No words available in sorted list.");
-                return string.Empty;
+                return "ERROR";
             }
         }
         //Initializes previous guesses, tnis is how the game saves/loads
         private async Task InitializeGuesses()
         {
-            guessEntries = await GameStateSerializer.LoadEntriesAsync();
+            GameState gameState = await GameStateSerializer.LoadGameStateAsync();
+            guessEntries = gameState.GuessEntries;
             if (guessEntries.Count > 0)
             {
                 foreach (string entry in guessEntries)
@@ -187,6 +215,10 @@ namespace Project2A
                         // Update the frame's content and background color
                         ((Label)existingFrame.Content).Text = word[i].ToString();
                         existingFrame.BackgroundColor = BGColor;
+
+                        // Add bounce animation
+                        await existingFrame.ScaleTo(1.2, 100);
+                        await existingFrame.ScaleTo(1.0, 100);
                     }
 
                     if (existingFrame != null)
@@ -199,6 +231,7 @@ namespace Project2A
                 }
                 guesses++;
                 await HandleGuessResult(word, selectedWord);
+                await SaveGameStateAsync(); // Save game state after updating variables
             }
             else
             {
@@ -233,8 +266,7 @@ namespace Project2A
                 await DisplayAlert("Correct Word Guessed!", "You have guessed the correct word, press continue to move on to the next word", "Continue");
                 RemoveWordFromList();
                 roundNum += 1;
-                await GameStateSerializer.SaveHistoryArrAsync(historyGrid);
-                await GameStateSerializer.SaveCorrectGuessesAsync(correctGuesses);
+                await SaveGameStateAsync();
                 await RestartGame();
             }
             else if (guesses == 6) // if all guesses are used up
@@ -242,7 +274,7 @@ namespace Project2A
                 await DisplayAlert("No Guesses Remaining", $"You have not guessed the correct word: {selectedWord}. Press continue to move on to the next word.", "Continue");
                 roundNum = 0;
                 ResetHistoryGrid();
-
+                await SaveGameStateAsync();
                 await RestartGame();
             }
         }
@@ -266,11 +298,9 @@ namespace Project2A
         public async Task RestartGame()
         {
             guessEntries.Clear();
-            await GameStateSerializer.SaveEntriesAsync(guessEntries);
+            await SaveGameStateAsync();
             selectedWord = GetRandomWord();
-            await GameStateSerializer.SaveSelectedWordAsync(selectedWord);
-
-            await GameStateSerializer.SaveRoundNumAsync(roundNum.ToString());
+            await SaveGameStateAsync();
             await InitializeGame();
         }
         //Checks if guessed word is the same as the selected word
@@ -300,36 +330,52 @@ namespace Project2A
         }
         //gets background & audio colour for letter
         private async Task<Color> GetLetterColorAsync(char letter, string selectedWord, int index)
-
         {
             Color bgColor;
             Debug.WriteLine($"{index}");
-            if (index >= 0 && index < selectedWord.Length)
+            try
             {
-                if (letter == selectedWord[index])
+                if (index >= 0 && index < selectedWord.Length)
                 {
-                    bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
-                    await player.CreateAudioPlayer("GreenLetter.mp3");
-                    historyGrid[roundNum][index + 1] = 3; // 3 = Green for correct letter
-                }
-                else if (selectedWord.Contains(letter))
-                {
-                    bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
-                    await player.CreateAudioPlayer("YellowLetter.mp3");
-                    historyGrid[roundNum][index + 1] = 2; // 2 = Yellow for letter in word but wrong position
+                    if (roundNum >= 0 && roundNum < historyGrid.Length)
+                    {
+                        if (letter == selectedWord[index])
+                        {
+                            bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
+                            await player.CreateAudioPlayer("GreenLetter.mp3");
+                            historyGrid[roundNum][index] = 3; // 3 = Green for correct letter
+                        }
+                        else if (selectedWord.Contains(letter))
+                        {
+                            bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
+                            await player.CreateAudioPlayer("YellowLetter.mp3");
+                            historyGrid[roundNum][index] = 2; // 2 = Yellow for letter in word but wrong position
+                        }
+                        else
+                        {
+                            bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
+                            await player.CreateAudioPlayer("GrayLetter.mp3");
+                            historyGrid[roundNum][index] = 1; // 1 = Gray for incorrect letter
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine("roundNum is out of range.");
+                        bgColor = Color.FromArgb("#ecf7e6"); // Default color
+                    }
+                    await SaveGameStateAsync(); // Save game state after updating variables
+                    return bgColor;
                 }
                 else
                 {
-                    bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
-                    await player.CreateAudioPlayer("GrayLetter.mp3");
-                    historyGrid[roundNum][index + 1] = 1; // 1 = Gray for incorrect letter
+                    return Color.FromArgb("#ecf7e6");
+                    RestartGame();
                 }
-                return bgColor;
             }
-            else
+            catch (Exception ex)
             {
-                return Color.FromArgb("#ecf7e6");
-                RestartGame();
+                Debug.WriteLine($"Error in GetLetterColorAsync: {ex.Message}");
+                return Color.FromArgb("#ecf7e6"); // Default color in case of error
             }
         }
         //Handler for submitting a guess
@@ -341,8 +387,7 @@ namespace Project2A
                 if (IsValidWord(word))
                 {
                     guessEntries.Add(word);
-                    await GameStateSerializer.SaveEntriesAsync(guessEntries);
-                    await GameStateSerializer.SaveHistoryArrAsync(historyGrid);
+                    await SaveGameStateAsync();
                 }
                 CreateWord(selectedWord, word, false);
             }
@@ -362,10 +407,11 @@ namespace Project2A
             {
                 Debug.WriteLine($"Word '{selectedWord}' not found in list."); // If word is not found in list
             }
+            await SaveGameStateAsync();
         }
-        private async void OnPlayerHistoryButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PlayerHistory());
-        }
+        //private async void OnPlayerHistoryButtonClicked(object sender, EventArgs e)
+        //{
+        //await Navigation.PushAsync(new PlayerHistory());
+        //}
     }
 }

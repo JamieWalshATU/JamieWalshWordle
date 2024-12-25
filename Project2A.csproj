@@ -76,16 +76,10 @@
 	  <Compile Update="DebugPage.xaml.cs">
 	    <DependentUpon>DebugPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="PlayerHistory.xaml.cs">
-	    <DependentUpon>PlayerHistory.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="DebugPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="PlayerHistory.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
