@@ -260,6 +260,7 @@ C:\Users\Jamie\Documents\GitHub\Project2A\bin\Debug\net8.0-ios\iossimulator-x64\
 C:\Users\Jamie\Documents\GitHub\Project2A\bin\Debug\net8.0-ios\iossimulator-x64\libxamarin-dotnet-nativeaot.a
 C:\Users\Jamie\Documents\GitHub\Project2A\bin\Debug\net8.0-ios\iossimulator-x64\libxamarin-dotnet.a
 C:\Users\Jamie\Documents\GitHub\Project2A\bin\Debug\net8.0-ios\iossimulator-x64\libxamarin-dotnet.dylib
+C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-ios\iossimulator-x64\build-signature\signature
 C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-ios\iossimulator-x64\mauiimage.inputs
 C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-ios\iossimulator-x64\mauifont.inputs
 C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-ios\iossimulator-x64\mauisplash.inputs

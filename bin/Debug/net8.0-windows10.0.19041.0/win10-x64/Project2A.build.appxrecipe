@@ -46,6 +46,9 @@
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\GreenLetter.mp3">
       <PackagePath>GreenLetter.mp3</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\history.png">
+      <PackagePath>history.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\itemFailed.mp3">
       <PackagePath>itemFailed.mp3</PackagePath>
     </AppxPackagedFile>
@@ -69,6 +72,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\LevelUpWithHint.mp3">
       <PackagePath>LevelUpWithHint.mp3</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\multiplayer.png">
+      <PackagePath>multiplayer.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\player.png">
+      <PackagePath>player.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\YellowLetter.mp3">
       <PackagePath>YellowLetter.mp3</PackagePath>

@@ -14,16 +14,16 @@ namespace Project2A
         List<string> guessEntries = new List<string>(); // List of all user-entries
         List<string> correctGuesses = new List<string>(); // List of correct guesses
         private AudioPlayer player = new AudioPlayer(); //Audioplayer for sound
-        int roundNum;
+        int roundNum; // Number of Round
         private string roundNumString;
-        private int[][] historyGrid;
+        private string[][] historyGrid; // Jagged array to track user progress for a UI Element
 
-        private int[][] CreateArray() // Creates a 30x6 array
+        private string[][] CreateArray() // Creates a 30x6 array
         {
-            int[][] jaggedArray = new int[30][];
+            string[][] jaggedArray = new string[30][];
             for (int i = 0; i < jaggedArray.Length; i++)
             {
-                jaggedArray[i] = new int[6]; 
+                jaggedArray[i] = new string[6]; 
             }
             return jaggedArray;
         }
@@ -312,6 +312,11 @@ namespace Project2A
             // Navigate to the debug menu page
             await Navigation.PushAsync(new DebugMenuPage());
         }
+        private async Task NavigateToPlayerHistroy() //Navigates to the PlayerHistory menu
+        {
+            // Navigate to the PlayerHistory menu page
+            await Navigation.PushAsync(new PlayerHistory());
+        }
 
         private void ResetHistoryGrid() //Resets the history grid to 0 for every value
         {
@@ -319,7 +324,7 @@ namespace Project2A
             {
                 for (int j = 0; j < historyGrid[i].Length; j++)
                 {
-                    historyGrid[i][j] = 0;
+                    historyGrid[i][j] = "";
                 }
             }
         }
@@ -362,6 +367,7 @@ namespace Project2A
         {
             Color bgColor;
             Debug.WriteLine($"{index}");
+            String roundIndexString = "";
             try
             {
                 if (index >= 0 && index < selectedWord.Length)
@@ -372,14 +378,14 @@ namespace Project2A
                         {
                             bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
                             await player.CreateAudioPlayer("GreenLetter.mp3");
-                            historyGrid[roundNum][index] = 3; // 3 = Green for correct letter
+                            historyGrid[roundNum][guesses] += "3"; // 3 = Green for correct letter
                             ChangeButtonColor(letter, Color.FromArgb("#66eb23"));
                         }
                         else if (selectedWord.Contains(letter))
                         {
                             bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
                             await player.CreateAudioPlayer("YellowLetter.mp3");
-                            historyGrid[roundNum][index] = 2; // 2 = Yellow for letter in word but wrong position
+                            historyGrid[roundNum][guesses] = "2"; // 2 = Yellow for letter in word but wrong position
                             ChangeButtonColor(letter, Color.FromArgb("#ebed51"));
                             
                         }
@@ -387,7 +393,7 @@ namespace Project2A
                         {
                             bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
                             await player.CreateAudioPlayer("GrayLetter.mp3");
-                            historyGrid[roundNum][index] = 1; // 1 = Gray for incorrect letter
+                            historyGrid[roundNum][guesses] = "1"; // 1 = Gray for incorrect letter
                             ChangeButtonColor(letter, Color.FromArgb("#ecf7e6"));
                         }
                     }

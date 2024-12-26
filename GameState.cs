@@ -11,7 +11,7 @@ namespace Project2A
         public List<string> GuessEntries { get; set; } = new List<string>();
         public string SelectedWord { get; set; } = string.Empty;
         public string RoundNumString { get; set; } = "0";
-        public int[][] HistoryArr { get; set; } = new int[30][];
+        public string[][] HistoryArr { get; set; } = new string[0][];
         public List<string> CorrectGuesses { get; set; } = new List<string>();
 
         public int ItemLCount { get; set; } = 0;
@@ -20,7 +20,7 @@ namespace Project2A
         {
             for (int i = 0; i < 30; i++)
             {
-                HistoryArr[i] = new int[6];
+                HistoryArr[i] = new string[6];
             }
         }
     }
