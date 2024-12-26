@@ -6,14 +6,14 @@ namespace Project2A
     public class SortedWords
     {
         //Creates a list to hold sorted words
-        private List<string> _wordListSorted = new List<string>();
-        public List<string> WordListSorted
+        private List<string> _wordListSorted = new List<string>(); //List to hold sorted words
+        public List<string> WordListSorted 
         {
             get => _wordListSorted;
             set => _wordListSorted = value;
         }
-        private static SortedWords _instance;
-        public static SortedWords GetInstance(WordViewModel wordViewModel)
+        private static SortedWords _instance; //Singleton instance of SortedWords class to avoid multiple instances of the class,   
+        public static SortedWords GetInstance(WordViewModel wordViewModel) 
         {
             if (_instance == null)
             {

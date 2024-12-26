@@ -38,7 +38,8 @@
             </Frame>
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
-                <Button Text="L" WidthRequest="40" />
+                <Button Text="L" WidthRequest="40" Clicked="ItemL"/>
+                <Label x:Name="LabelL" Text="0" WidthRequest="40"/>
                 <Frame 
         WidthRequest="120" 
         HeightRequest="50" 
@@ -56,39 +57,41 @@
                 TextColor="Black" />
                     </Grid>
                 </Frame>
-                <Button Text="R" WidthRequest="40" />
+                <Label x:Name="LabelR" Text="0" WidthRequest="40"/>
+                <Button Text="R" WidthRequest="40" Clicked="ItemR"/>
             </HorizontalStackLayout>
+            <!-- I know the document said dont create another keyboard, however for features I wanted to add to the game it was the route I wanted to take as I can have abilities and gameplay affect the keyboard which I cant do to a native IOS or Android Keyboard-->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                    <Button Text="Q" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="W" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="E" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="R" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="T" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="Y" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="U" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="I" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="O" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="P" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="20,0,0,0">
-                <Button Text="A" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="S" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button Text="D" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button Text="F" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button Text="G" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="H" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="J" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="K" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="L" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="50,0,0,0">
-                <Button Text="Z" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="X" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="C" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="V" MinimumWidthRequest="40" MinimumHeightRequest="40"  Clicked="OnKeyClicked"/>
-                <Button Text="B" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button Text="N" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button Text="M" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonQ" Text="Q" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonW" Text="W" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonE" Text="E" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonR" Text="R" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonT" Text="T" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonY" Text="Y" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonU" Text="U" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonI" Text="I" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonO" Text="O" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonP" Text="P" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="20,0,0,0">
+                <Button x:Name="ButtonA" Text="A" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonS" Text="S" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonD" Text="D" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonF" Text="F" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonG" Text="G" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonH" Text="H" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonJ" Text="J" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonK" Text="K" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonL" Text="L" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="50,0,0,0">
+                <Button x:Name="ButtonZ" Text="Z" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonX" Text="X" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonC" Text="C" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonV" Text="V" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonB" Text="B" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonN" Text="N" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonM" Text="M" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
                 <Button Text="Delete" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Red" TextColor="White" Clicked="OnKeyClicked" />
                 </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="10,0,0,0">

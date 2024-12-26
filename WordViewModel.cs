@@ -17,7 +17,7 @@ namespace Project2A
 
         public WordViewModel(HttpClient httpClient)
         {
-            this.httpClient = httpClient ?? new HttpClient();
+            this.httpClient = httpClient ?? new HttpClient(); 
         }
         // Method to load words from a local file or fetch them from API
         public async Task GetWords()

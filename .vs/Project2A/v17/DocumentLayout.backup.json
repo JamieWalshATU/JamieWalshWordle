@@ -3,40 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\audioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:audioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\debugpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:debugpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\debugpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:debugpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\sortedwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:sortedwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:gamestateserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\keyhandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:keyhandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\audioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:audioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\debugpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:debugpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -47,8 +39,12 @@
       "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\wordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:wordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\sortedwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:sortedwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|c:\\users\\jamie\\documents\\github\\project2a\\debugpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89654AB5-E1AA-4124-B300-D85A3B6E7F46}|Project2A.csproj|solutionrelative:debugpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,44 +54,30 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "SortedWords.cs",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\SortedWords.cs",
               "RelativeDocumentMoniker": "SortedWords.cs",
               "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\SortedWords.cs",
               "RelativeToolTip": "SortedWords.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-25T19:04:34.087Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "WordViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\WordViewModel.cs",
-              "RelativeDocumentMoniker": "WordViewModel.cs",
-              "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\WordViewModel.cs",
-              "RelativeToolTip": "WordViewModel.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAwwAgAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T11:52:49.46Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\MainPage.xaml",
               "RelativeDocumentMoniker": "MainPage.xaml",
               "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\MainPage.xaml",
               "RelativeToolTip": "MainPage.xaml",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAC4AAAATAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAswDsAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-11-25T17:24:47.896Z",
               "IsPinned": true,
@@ -111,20 +93,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\MainPage.xaml.cs",
+              "RelativeToolTip": "MainPage.xaml.cs",
+              "ViewState": "AgIAAMcAAAAAAAAAAAA5wB0BAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T14:27:41.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "GameState.cs",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\GameState.cs",
               "RelativeDocumentMoniker": "GameState.cs",
               "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\GameState.cs",
               "RelativeToolTip": "GameState.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-25T22:11:42.498Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "AppShell.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\AppShell.xaml.cs",
               "RelativeDocumentMoniker": "AppShell.xaml.cs",
@@ -136,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "AppShell.xaml",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\AppShell.xaml",
               "RelativeDocumentMoniker": "AppShell.xaml",
@@ -148,20 +143,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "DebugPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\DebugPage.xaml.cs",
               "RelativeDocumentMoniker": "DebugPage.xaml.cs",
               "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\DebugPage.xaml.cs",
               "RelativeToolTip": "DebugPage.xaml.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwAIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T19:24:30.77Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-25T19:24:30.77Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DebugPage.xaml",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\DebugPage.xaml",
               "RelativeDocumentMoniker": "DebugPage.xaml",
@@ -169,59 +163,45 @@
               "RelativeToolTip": "DebugPage.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-25T19:24:19.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-25T19:24:19.349Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "AudioPlayer.cs",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\AudioPlayer.cs",
               "RelativeDocumentMoniker": "AudioPlayer.cs",
               "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\AudioPlayer.cs",
               "RelativeToolTip": "AudioPlayer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T10:39:57.136Z"
+              "WhenOpened": "2024-12-04T10:39:57.136Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "GameStateSerializer.cs",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\GameStateSerializer.cs",
               "RelativeDocumentMoniker": "GameStateSerializer.cs",
               "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\GameStateSerializer.cs",
               "RelativeToolTip": "GameStateSerializer.cs",
-              "ViewState": "AgIAAO4AAAAAAAAAAAAswOQAAABaAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwDIAAACcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T11:34:10.336Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainPage.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\MainPage.xaml.cs",
-              "RelativeDocumentMoniker": "MainPage.xaml.cs",
-              "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\MainPage.xaml.cs",
-              "RelativeToolTip": "MainPage.xaml.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAAAKoAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T14:27:41.332Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "KeyHandling.cs",
               "DocumentMoniker": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\KeyHandling.cs",
               "RelativeDocumentMoniker": "KeyHandling.cs",
               "ToolTip": "C:\\Users\\Jamie\\Documents\\GitHub\\Project2A\\KeyHandling.cs",
               "RelativeToolTip": "KeyHandling.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAC8AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T15:35:06.996Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T15:35:06.996Z"
             }
           ]
         }
