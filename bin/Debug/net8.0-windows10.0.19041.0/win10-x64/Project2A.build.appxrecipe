@@ -46,6 +46,15 @@
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\GreenLetter.mp3">
       <PackagePath>GreenLetter.mp3</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\itemFailed.mp3">
+      <PackagePath>itemFailed.mp3</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\itemLUsed.mp3">
+      <PackagePath>itemLUsed.mp3</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\itemRUsed.mp3">
+      <PackagePath>itemRUsed.mp3</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\Resources\Raw\LevelPassed.mp3">
       <PackagePath>LevelPassed.mp3</PackagePath>
     </AppxPackagedFile>
@@ -234,6 +243,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\item_l_icon.scale-100.png">
+      <PackagePath>item_l_icon.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\item_r_icon.scale-100.png">
+      <PackagePath>item_r_icon.scale-100.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jamie\Documents\GitHub\Project2A\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Project2A.deps.json">
       <PackagePath>Project2A.deps.json</PackagePath>

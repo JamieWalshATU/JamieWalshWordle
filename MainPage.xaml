@@ -38,7 +38,7 @@
             </Frame>
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
-                <Button Text="L" WidthRequest="40" Clicked="ItemL"/>
+                <ImageButton x:Name ="ItemLButton" Source="Resources/Raw/item_r_icon.png" WidthRequest="40" Clicked="ItemL"/>
                 <Label x:Name="LabelL" Text="0" WidthRequest="40"/>
                 <Frame 
         WidthRequest="120" 
@@ -58,7 +58,7 @@
                     </Grid>
                 </Frame>
                 <Label x:Name="LabelR" Text="0" WidthRequest="40"/>
-                <Button Text="R" WidthRequest="40" Clicked="ItemR"/>
+                <ImageButton x:Name ="ItemRButton" Source="Resources/Raw/item_l_icon.png" WidthRequest="40" Clicked="ItemR"/>
             </HorizontalStackLayout>
             <!-- I know the document said dont create another keyboard, however for features I wanted to add to the game it was the route I wanted to take as I can have abilities and gameplay affect the keyboard which I cant do to a native IOS or Android Keyboard-->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">

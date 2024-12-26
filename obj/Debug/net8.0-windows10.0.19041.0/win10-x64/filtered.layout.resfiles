@@ -52,6 +52,8 @@ dotnet_bot.scale-125.png
 dotnet_bot.scale-150.png
 dotnet_bot.scale-200.png
 dotnet_bot.scale-400.png
+item_l_icon.scale-100.png
+item_r_icon.scale-100.png
 splashSplashScreen.scale-100.png
 splashSplashScreen.scale-125.png
 splashSplashScreen.scale-150.png
@@ -60,6 +62,9 @@ splashSplashScreen.scale-400.png
 AboutAssets.txt
 GrayLetter.mp3
 GreenLetter.mp3
+itemFailed.mp3
+itemLUsed.mp3
+itemRUsed.mp3
 LevelPassed.mp3
 LevelUpBonus.mp3
 LevelUpWithHint.mp3

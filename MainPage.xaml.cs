@@ -100,13 +100,6 @@ namespace Project2A
                 RestartGame();
             }
         }
-        private async void UpdateItemCounts()
-        {
-            LabelL.Text = $"{itemLCount}";
-            Debug.WriteLine($"Item L Count: {itemLCount}");
-            LabelR.Text = $"{itemRCount}";
-            Debug.WriteLine($"Item R Count: {itemRCount}");
-        }
 
         private async Task SaveGameStateAsync()
         {
@@ -436,27 +429,79 @@ namespace Project2A
         {
             keyHandling.OnKeyClicked(sender, e);
         }
-        private void ItemR(object sender, EventArgs e) // ItemR will change two letters on the keyboard to green
+        private async void ItemR(object sender, EventArgs e) // ItemR will change two letters on the keyboard to green
         {
-            Debug.WriteLine($"ItemR called. selectedWord: {selectedWord}");
-            if (!string.IsNullOrEmpty(selectedWord) && selectedWord.Length == 5)
+            if (itemRCount > 0)
             {
-                Random random = new Random();
-                int randomIndex = random.Next(selectedWord.Length);
-                int randomIndex2 = random.Next(selectedWord.Length);
-                while (randomIndex == randomIndex2)
-                    randomIndex2 = random.Next(selectedWord.Length);
-                char randomLetter = char.ToUpper(selectedWord[randomIndex]);
-                ChangeButtonColor(randomLetter, Color.FromArgb("#66eb23")); // Green color
-                randomLetter = char.ToUpper(selectedWord[randomIndex2]);
-                ChangeButtonColor(randomLetter, Color.FromArgb("#66eb23")); // Green color
+                itemRCount -= 1;
+                Debug.WriteLine($"ItemR called. selectedWord: {selectedWord}");
+                if (!string.IsNullOrEmpty(selectedWord) && selectedWord.Length == 5)
+                {
+                    Random random = new Random();
+                    int randomIndex = random.Next(selectedWord.Length);
+                    int randomIndex2 = random.Next(selectedWord.Length);
+                    while (randomIndex == randomIndex2)
+                        randomIndex2 = random.Next(selectedWord.Length);
+                    char randomLetter = char.ToUpper(selectedWord[randomIndex]);
+                    ChangeButtonColor(randomLetter, Color.FromArgb("#66eb23")); // Green color
+                    randomLetter = char.ToUpper(selectedWord[randomIndex2]);
+                    ChangeButtonColor(randomLetter, Color.FromArgb("#66eb23")); // Green color
+                    await player.CreateAudioPlayer("itemRUsed.mp3");
+                    await player.PlayAudio();
+                    UpdateItemCounts();
+                }
+            }
+            else
+            {
+                await ItemRButton.ScaleTo(1.2, 100);
+                await player.CreateAudioPlayer("itemFailed.mp3");
+                await player.PlayAudio();
+                await ItemRButton.ScaleTo(1.0, 100);
             }
         }
-        
-        private void ItemL(Object sender, EventArgs e)// Item L will skip a round entirely guessing the correct word,
+
+        private async void ItemL(object sender, EventArgs e)// item l will skip a round entirely guessing the correct word,
         {
-            Debug.WriteLine($"ItemL called.");
-            GuessSubmission(selectedWord);
+            if (itemLCount > 0)
+            {
+                Debug.WriteLine($"iteml called.");
+                GuessSubmission(selectedWord);
+                itemLCount -= 1;
+                await player.CreateAudioPlayer("itemLUsed.mp3");
+                await player.PlayAudio();
+                UpdateItemCounts();
+            }
+            else
+            {
+                await ItemLButton.ScaleTo(1.2, 100);
+                await player.CreateAudioPlayer("itemfailed.mp3");
+                await player.PlayAudio();
+                await ItemLButton.ScaleTo(1.0, 100);
+
+            }
+        }
+        private async void UpdateItemCounts() //Updates the items counts
+        {
+            LabelL.Text = $"{itemLCount}";
+            Debug.WriteLine($"Item L Count: {itemLCount}");
+            LabelR.Text = $"{itemRCount}";
+            Debug.WriteLine($"Item R Count: {itemRCount}");
+            if (itemLCount == 0)
+            {
+                ItemLButton.BackgroundColor = Color.FromArgb("#AA4A44"); // Red Color
+            }
+            else
+            {
+                ItemLButton.BackgroundColor = Color.FromArgb("#DAF7A6"); // Light Yellow
+            }
+            if (itemRCount == 0)
+            {
+                ItemRButton.BackgroundColor = Color.FromArgb("#AA4A44"); // Red Color
+            }
+            else
+            {
+                ItemRButton.BackgroundColor = Color.FromArgb("#DAF7A6"); // Light Yellow
+            }
         }
 
         private async void RemoveWordFromList()
