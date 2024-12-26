@@ -3,6 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project2A.MainPage"
              xmlns:local="clr-namespace:Project2A">
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="BorderColor" Value="Gray" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HasShadow" Value="True" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="MinimumWidthRequest" Value="40" />
+            <Setter Property="MinimumHeightRequest" Value="40" />
+            <Setter Property="BackgroundColor" Value="#007ACC" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+    </ContentPage.Resources>
+    
     <ScrollView>
         <VerticalStackLayout Padding="10">
             <Grid x:Name="topGrid" RowSpacing="10" ColumnSpacing="10" Padding="10">
@@ -38,27 +65,19 @@
             </Frame>
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
-                <ImageButton x:Name ="ItemLButton" Source="Resources/Raw/item_r_icon.png" WidthRequest="40" Clicked="ItemL"/>
-                <Label x:Name="LabelL" Text="0" WidthRequest="40"/>
-                <Frame 
-        WidthRequest="120" 
-        HeightRequest="50" 
-        BorderColor="Gray" 
-        CornerRadius="10" 
-        Padding="0"
-        HorizontalOptions="Center" 
-        VerticalOptions="Center">
+                <ImageButton x:Name ="ItemLButton" Source="item_r_icon.png" Clicked="ItemL"/>
+                <Frame WidthRequest="40" HeightRequest="40" BorderColor="Gray" CornerRadius="10" Padding="0">
+                    <Label x:Name="LabelL" Text="0" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Frame>
+                <Frame WidthRequest="100" HeightRequest="50">
                     <Grid>
-                        <Label 
-                x:Name="EntryLabel" 
-                HorizontalOptions="Center" 
-                VerticalOptions="Center" 
-                FontSize="15" 
-                TextColor="Black" />
+                        <Label x:Name="EntryLabel" />
                     </Grid>
                 </Frame>
-                <Label x:Name="LabelR" Text="0" WidthRequest="40"/>
-                <ImageButton x:Name ="ItemRButton" Source="Resources/Raw/item_l_icon.png" WidthRequest="40" Clicked="ItemR"/>
+                <Frame WidthRequest="40" HeightRequest="40">
+                    <Label x:Name="LabelR" Text="0" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Frame>
+                <ImageButton x:Name ="ItemRButton" Source="item_l_icon.png" Clicked="ItemR"/>
             </HorizontalStackLayout>
             <!-- I know the document said dont create another keyboard, however for features I wanted to add to the game it was the route I wanted to take as I can have abilities and gameplay affect the keyboard which I cant do to a native IOS or Android Keyboard-->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
