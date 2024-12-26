@@ -4,10 +4,9 @@
              x:Class="Project2A.PlayerHistory"
              Title="PlayerHistory">
     <ScrollView>
-        <VerticalStackLayout>
-            <Grid RowSpacing="5" ColumnSpacing="5" Padding="5">
-            </Grid>
-                <Label x:Name="Test1" Text="TEST1"/>
-        </VerticalStackLayout>
+        <StackLayout x:Name="container1" Spacing="0" Padding="0" WidthRequest="100" VerticalOptions="Start" HorizontalOptions="Start" Margin="10,0,0,0">
+            <Label x:Name="roundCounter" VerticalOptions="End" HorizontalOptions="End"></Label>
+            <Label x:Name="guessCounter" VerticalOptions="End" HorizontalOptions="End"></Label>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

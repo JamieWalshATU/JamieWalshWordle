@@ -11,9 +11,10 @@ namespace Project2A
         public List<string> GuessEntries { get; set; } = new List<string>();
         public string SelectedWord { get; set; } = string.Empty;
         public string RoundNumString { get; set; } = "0";
-        public string[][] HistoryArr { get; set; } = new string[0][];
+        public string[][] HistoryArr { get; set; } = new string[30][];
         public List<string> CorrectGuesses { get; set; } = new List<string>();
 
+        public int TotalGuesses { get; set; } = 0;
         public int ItemLCount { get; set; } = 0;
         public int ItemRCount { get; set; } = 0;
         public GameState()

@@ -34,10 +34,10 @@ public partial class DebugMenuPage : ContentPage
     {
         // Clear history grid
         GameState gameState = await GameStateSerializer.LoadGameStateAsync();
-        gameState.HistoryArr = new int[30][];
+        gameState.HistoryArr = new string[30][];
         for (int i = 0; i < gameState.HistoryArr.Length; i++)
         {
-            gameState.HistoryArr[i] = new int[6];
+            gameState.HistoryArr[i] = new string[6];
         }
         await GameStateSerializer.SaveGameStateAsync(gameState);
         await DisplayAlert("Clear History Grid", "History grid has been cleared.", "OK");

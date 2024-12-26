@@ -9,6 +9,7 @@ namespace Project2A
         private SortedWords sortedWords;
         private string selectedWord;   // Selected word is a random chosen word from the sorted list, this is the word the user must guess.
         public int guesses;
+        public int totalGuesses; // Tracks total guesses overall,
         public int itemLCount;
         public int itemRCount;
         List<string> guessEntries = new List<string>(); // List of all user-entries
@@ -16,7 +17,7 @@ namespace Project2A
         private AudioPlayer player = new AudioPlayer(); //Audioplayer for sound
         int roundNum; // Number of Round
         private string roundNumString;
-        private string[][] historyGrid; // Jagged array to track user progress for a UI Element
+        private string[][] historyGrid; // Jagged array to track user progress for a UI Element, left side is the roundNumber and the right is the index of the guess entry, this is used to create a history of all attempts in a current run, it's tracked with a 5 digit string so "32213" would display "Green Yellow Yellow Gray Yellow"
 
         private string[][] CreateArray() // Creates a 30x6 array
         {
@@ -57,7 +58,7 @@ namespace Project2A
                 InitializeBlankGrid();
                 ChangeAllButtonColors(Color.FromArgb("#A9A9A9")); // Dark gray color
 
-                Debug.WriteLine("Initializing game..."); 
+                Debug.WriteLine("Initializing game...");
 
                 // Gets words from viewModel, sorts then binds them
                 await wordViewModel.GetWords();
@@ -79,7 +80,8 @@ namespace Project2A
                 historyGrid = gameState.HistoryArr;
                 itemLCount = gameState.ItemLCount;
                 itemRCount = gameState.ItemRCount;
-
+                totalGuesses = gameState.TotalGuesses;
+                Debug.WriteLine($"History Grid: {historyGrid[0][0]}");
 
                 if (string.IsNullOrEmpty(selectedWord))
                 {
@@ -93,11 +95,13 @@ namespace Project2A
                 await InitializeGuesses();
                 UpdateItemCounts();
             }
+            catch (IndexOutOfRangeException ex)
+            {
+                await RestartGame();
+            }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error initializing game: {ex.Message}");
-                await DisplayAlert("Error", "An error occurred while initializing the game. Please try again.", "OK");
-                RestartGame();
+                await RestartGame();
             }
         }
 
@@ -110,6 +114,7 @@ namespace Project2A
                 RoundNumString = roundNum.ToString(),
                 HistoryArr = historyGrid,
                 CorrectGuesses = correctGuesses,
+                TotalGuesses = totalGuesses,
                 ItemLCount = itemLCount,
                 ItemRCount = itemRCount
             };
@@ -212,7 +217,7 @@ namespace Project2A
             {
                 Color BGColor = Color.FromArgb("#ecf7e6"); // Gray BG (Default)
                 int row = guesses;
-
+                historyGrid[roundNum][guesses] = "";
                 //Displays each letter 
                 for (int i = 0; i < word.Length; i++)
                 {
@@ -238,7 +243,9 @@ namespace Project2A
                             await Task.Delay(500);
                         }
                 }
+                Debug.WriteLine($"{historyGrid[roundNum][guesses]}");
                 guesses++;
+                totalGuesses++;
                 await HandleGuessResult(word, selectedWord);
                 await SaveGameStateAsync(); // Save game state after updating variables
             }
@@ -385,7 +392,7 @@ namespace Project2A
                         {
                             bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
                             await player.CreateAudioPlayer("YellowLetter.mp3");
-                            historyGrid[roundNum][guesses] = "2"; // 2 = Yellow for letter in word but wrong position
+                            historyGrid[roundNum][guesses] += "2"; // 2 = Yellow for letter in word but wrong position
                             ChangeButtonColor(letter, Color.FromArgb("#ebed51"));
                             
                         }
@@ -393,7 +400,7 @@ namespace Project2A
                         {
                             bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
                             await player.CreateAudioPlayer("GrayLetter.mp3");
-                            historyGrid[roundNum][guesses] = "1"; // 1 = Gray for incorrect letter
+                            historyGrid[roundNum][guesses] += "1"; // 1 = Gray for incorrect letter
                             ChangeButtonColor(letter, Color.FromArgb("#ecf7e6"));
                         }
                     }
@@ -413,7 +420,6 @@ namespace Project2A
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error in GetLetterColorAsync: {ex.Message}");
                 return Color.FromArgb("#ecf7e6"); // Default color in case of error
             }
         }
