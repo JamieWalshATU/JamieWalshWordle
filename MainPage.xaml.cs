@@ -5,61 +5,129 @@ namespace Project2A
     public partial class MainPage : ContentPage
     {
         private KeyHandling keyHandling;
-        
         private WordViewModel wordViewModel;
         private SortedWords sortedWords;
-        private string selectedWord;         // Selected word is a random chosen word from the sorted list, this is the word the user must guess.
-        
+        private string selectedWord;   // Selected word is a random chosen word from the sorted list, this is the word the user must guess.
         public int guesses;
+        public int totalGuesses; // Tracks total guesses overall,
+        public int itemLCount;
+        public int itemRCount;
         List<string> guessEntries = new List<string>(); // List of all user-entries
-
+        List<string> correctGuesses = new List<string>(); // List of correct guesses
         private AudioPlayer player = new AudioPlayer(); //Audioplayer for sound
+        int roundNum; // Number of Round
+        private string roundNumString;
+        private string[][] historyGrid; // Jagged array to track user progress for a UI Element, left side is the roundNumber and the right is the index of the guess entry, this is used to create a history of all attempts in a current run, it's tracked with a 5 digit string so "32213" would display "Green Yellow Yellow Gray Yellow"
+
+        private string[][] CreateArray() // Creates a 30x6 array
+        {
+            string[][] jaggedArray = new string[30][];
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                jaggedArray[i] = new string[6];
+            }
+            return jaggedArray;
+        }
 
         Grid grid;
         public MainPage()
         {
             InitializeComponent();
 
-            keyHandling = new KeyHandling();
-            keyHandling.KeyClickedEvent += GuessSubmission;
+            keyHandling = new KeyHandling
+            {
+                EntryLabel = EntryLabel // EntryLabel is the label that displays the user's input
+            };
+
+            keyHandling.KeyClickedEvent += GuessSubmission; // Event handler for user input
 
             HttpClient client = new HttpClient();
             wordViewModel = new WordViewModel(client);
-            sortedWords = new SortedWords(wordViewModel);//Sorted list of 30 words
+            sortedWords = SortedWords.GetInstance(wordViewModel); // Use singleton instance of Sorted Words
             wordGrid = this.wordGrid; // Grid that displays guesses
+
+            historyGrid = CreateArray();
         }
 
+        //Initializes or Re-Initializes the game on page appearing
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await InitializeGame();
+        }
+        private async Task NavigateToDebugMenu() //Navigates to the debug menu
+        {
+            // Navigate to the debug menu page
+            await Navigation.PushAsync(new DebugMenuPage());
+        }
+        private async Task NavigateToPlayerHistroy() //Navigates to the PlayerHistory menu
+        {
+            // Navigate to the PlayerHistory menu page
+            await Navigation.PushAsync(new PlayerHistory());
+        }
         private async Task InitializeGame()
         {
-            guesses = 0;
+            try
+            {
+                guesses = 0;
 
-            InitializeBlankGrid();
+                InitializeBlankGrid();
+                ChangeAllButtonColors(Color.FromArgb("#A9A9A9")); // Dark gray color
 
-            Debug.WriteLine("Initializing game...");
+                Debug.WriteLine("Initializing game...");
 
-            // Gets words from viewModel, sorts then binds them
-            await wordViewModel.GetWords();
-            Debug.WriteLine($"WordList has {wordViewModel.WordList.Count} words.");
+                // Gets words from viewModel, sorts then binds them
+                await wordViewModel.GetWords();
+                Debug.WriteLine($"WordList has {wordViewModel.WordList.Count} words.");
 
-            sortedWords.SortWords();
-            Debug.WriteLine($"Sorted words list has {sortedWords.WordListSorted.Count} words.");
-            BindingContext = sortedWords;
+                sortedWords.SortWords();
+                Debug.WriteLine($"Sorted words list has {sortedWords.WordListSorted.Count} words.");
+                BindingContext = sortedWords;
 
-            //  Loads saved selectedWord
-            selectedWord = await GameStateSerializer.LoadSelectedWordAsync();
-            Debug.WriteLine($"Selected word: {selectedWord}");
+                // Load game state
+                GameState gameState = await GameStateSerializer.LoadGameStateAsync();
 
-            //Loads previous guesses
-            await InitializeGuesses();
+                // Set game state
+                selectedWord = gameState.SelectedWord;
+                roundNumString = gameState.RoundNumString;
+                roundNum = int.Parse(roundNumString);
+                guessEntries = gameState.GuessEntries;
+                correctGuesses = gameState.CorrectGuesses;
+                historyGrid = gameState.HistoryArr;
+                itemLCount = gameState.ItemLCount;
+                itemRCount = gameState.ItemRCount;
+                totalGuesses = gameState.TotalGuesses;
+                Debug.WriteLine($"History Grid: {historyGrid[0][0]}");
+
+                if (string.IsNullOrEmpty(selectedWord))
+                {
+                    selectedWord = GetRandomWord();
+                    gameState.SelectedWord = selectedWord;
+                    await SaveGameStateAsync();
+                }
+                Debug.WriteLine($"Selected word: {selectedWord}");
+
+                // Initialize previous guesses
+                await InitializeGuesses();
+                UpdateItemCounts();
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                await RestartGame();
+            }
+            catch (Exception ex)
+            {
+                await RestartGame();
+            }
         }
-        
+
         //Creates a 6x5 Grid
         private void InitializeBlankGrid()
         {
             wordGrid.Children.Clear();
             wordGrid.RowDefinitions.Clear();
 
-            for (int row = 0; row < 6; row++)  
+            for (int row = 0; row < 6; row++)
             {
                 wordGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
@@ -73,18 +141,32 @@ namespace Project2A
             }
 
         }
+        private async Task SaveGameStateAsync()
+        {
+            GameState gameState = new GameState
+            {
+                GuessEntries = guessEntries,
+                SelectedWord = selectedWord,
+                RoundNumString = roundNum.ToString(),
+                HistoryArr = historyGrid,
+                CorrectGuesses = correctGuesses,
+                TotalGuesses = totalGuesses,
+                ItemLCount = itemLCount,
+                ItemRCount = itemRCount
+            };
+
+            await GameStateSerializer.SaveGameStateAsync(gameState);
+        }
+
         private async Task<string> GetSelectedWord()
         {
-            selectedWord = await GameStateSerializer.LoadSelectedWordAsync();
-            if (selectedWord.Length > 5 )
+            GameState gameState = await GameStateSerializer.LoadGameStateAsync();
+            selectedWord = gameState.SelectedWord;
+            if (string.IsNullOrEmpty(selectedWord) || !sortedWords.WordListSorted.Contains(selectedWord))
             {
                 selectedWord = GetRandomWord();
+                await SaveGameStateAsync();
             }
-            if (string.IsNullOrEmpty(selectedWord)) //CHecks if there is a valid selected word, if not it creates one
-            {
-                selectedWord = GetRandomWord();
-                await GameStateSerializer.SaveSelectedWordAsync(selectedWord);
-            } //Saves selected word
             return selectedWord;
         }
         //method for fetching a random word
@@ -99,13 +181,14 @@ namespace Project2A
             else
             {
                 Debug.WriteLine("No words available in sorted list.");
-                return string.Empty;
+                return "ERROR";
             }
         }
         //Initializes previous guesses, tnis is how the game saves/loads
         private async Task InitializeGuesses()
         {
-            guessEntries = await GameStateSerializer.LoadEntriesAsync();
+            GameState gameState = await GameStateSerializer.LoadGameStateAsync();
+            guessEntries = gameState.GuessEntries;
             if (guessEntries.Count > 0)
             {
                 foreach (string entry in guessEntries)
@@ -114,23 +197,36 @@ namespace Project2A
                 }
             }
         }
-        //Checks if the entry is 5 alpabetic letters for error handling
-        private bool IsValidWord(string word)
-        {
-            return word.Length == 5 && word.All(c => Char.IsLetter(c));
-        }
 
-        //Initializes or Re-Initializes the game on page appearing
-        protected override async void OnAppearing()
+        //Handler for submitting a guess
+        public async void GuessSubmission(string enteredWord)
         {
-            base.OnAppearing();
-            await InitializeGame();
+            if (!string.IsNullOrWhiteSpace(enteredWord))
+            {
+                string word = enteredWord.ToUpper();
+                if (IsValidWord(word))
+                {
+                    guessEntries.Add(word);
+                    await SaveGameStateAsync();
+                }
+                CreateWord(selectedWord, word, false);
+            }
         }
-
-        //User Entry to Grid-UI
-        public async void CreateWord(String selectedWord, String guessedWord, Boolean loadingEntry)
+        public async void CreateWord(String selectedWord, String guessedWord, Boolean loadingEntry) //Creates the word in the grid, loadingEntry is used to determine if the game is loading or if the user is inputting a word
         {
             Debug.WriteLine("createWord called with selectedWord: " + selectedWord);
+
+            if (string.IsNullOrEmpty(selectedWord))
+            {
+                selectedWord = await GetSelectedWord();
+                if (string.IsNullOrEmpty(selectedWord))
+                {
+                    Debug.WriteLine("Selected word is still null");
+                    selectedWord = "ERROR";
+                    return;
+                }
+            }
+
             selectedWord = selectedWord.ToUpper();
             string word = guessedWord.ToUpper();
 
@@ -138,7 +234,7 @@ namespace Project2A
             {
                 Color BGColor = Color.FromArgb("#ecf7e6"); // Gray BG (Default)
                 int row = guesses;
-
+                historyGrid[roundNum][guesses] = "";
                 //Displays each letter 
                 for (int i = 0; i < word.Length; i++)
                 {
@@ -150,64 +246,130 @@ namespace Project2A
                         // Update the frame's content and background color
                         ((Label)existingFrame.Content).Text = word[i].ToString();
                         existingFrame.BackgroundColor = BGColor;
+
+                        // Add bounce animation
+                        await existingFrame.ScaleTo(1.2, 100);
+                        await existingFrame.ScaleTo(1.0, 100);
                     }
 
                     if (existingFrame != null)
 
                         if (!loadingEntry)// if this is an actual user input, the game will play audio and delay to inputs to form an animation, if the game is just laoding up these functions are ignored
-                    {
-                        await player.PlayAudio();
-                        await Task.Delay(500);
-                    }
+                        {
+                            await player.PlayAudio();
+                            await Task.Delay(500);
+                        }
                 }
+                Debug.WriteLine($"{historyGrid[roundNum][guesses]}");
                 guesses++;
+                totalGuesses++;
                 await HandleGuessResult(word, selectedWord);
+                await SaveGameStateAsync(); // Save game state after updating variables
             }
             else
             {
                 await DisplayAlert("Invalid Entry", "Please enter a valid 5 letter word", "Try Again");
             }
         }
-        Frame GetFrameAtPosition(int row, int column)
+        //Checks if the entry is 5 alpabetic letters for error handling
+        private bool IsValidWord(string word)
         {
-            foreach (var child in wordGrid.Children)
-            {
-                if (wordGrid.GetRow(child) == row && wordGrid.GetColumn(child) == column && child is Frame frame)
-                {
-                    return frame;
-                }
-            }
-            return null;
+            return word.Length == 5 && word.All(c => Char.IsLetter(c));
         }
-
-        private async Task HandleGuessResult(string word, string selectedWord)
+        private async void RemoveWordFromList()
         {
-            if (CheckForWin(word, selectedWord)) // If word is correct
+            if (sortedWords.Remove(selectedWord)) // Remove word from shared list
             {
-                await player.CreateAudioPlayer("LevelPassed.mp3");
-                await player.PlayAudio();
-                await DisplayAlert("Correct Word Guessed!", "You have guessed the correct word, press continue to move on to the next word", "Continue");
-                await RestartGame();
+                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}"); // If word is found in list
             }
-            else if (guesses == 6) // if all guesses are used up
+            else
             {
-                await DisplayAlert("No Guesses Remaining", $"You have not guessed the correct word: {selectedWord}. Press continue to move on to the next word.", "Continue");
-                await RestartGame();
+                Debug.WriteLine($"Word '{selectedWord}' not found in list."); // If word is not found in list
             }
-        }
-        //Clears entries and selects a new word
-        private async Task RestartGame()
-        {
-            guessEntries.Clear();
-            await GameStateSerializer.SaveEntriesAsync(guessEntries);
-            selectedWord = GetRandomWord();
-            await GameStateSerializer.SaveSelectedWordAsync(selectedWord);
-            await InitializeGame();
+            await SaveGameStateAsync();
         }
         //Checks if guessed word is the same as the selected word
         private bool CheckForWin(string word, string selectedWord)
         {
             return word == selectedWord;
+        }
+        private async Task HandleGuessResult(string word, string selectedWord)
+        {
+            if (word == "DEBUG")  // If user enters "DEBUG" in the game a seperate page is opened
+            {
+                await DisplayAlert("Debug Mode", "Entering debug menu...", "Continue");
+                await NavigateToDebugMenu();
+                return;
+            }
+            if (CheckForWin(word, selectedWord)) // If word is correct
+            {
+                correctGuesses.Add(word); // Add correct guess to the list
+                if ((roundNum + 1) % 3 == 0)
+                {
+                    await player.CreateAudioPlayer("LevelUpWithHint.mp3");
+                }
+                else if ((roundNum + 1) % 5 == 0)
+                {
+                    await player.CreateAudioPlayer("LevelUpBonus.mp3");
+                }
+                else
+                {
+                    await player.CreateAudioPlayer("LevelPassed.mp3");
+                }
+                await player.PlayAudio();
+                await DisplayAlert("Correct Word Guessed!", "You have guessed the correct word, press continue to move on to the next word", "Continue");
+                RemoveWordFromList();
+                roundNum += 1;
+                if (roundNum % 3 == 0) // Increment itemRCount every 3 rounds
+                {
+                    itemRCount += 1;
+                }
+                if (roundNum % 5 == 0) // Increment itemLCount every 3 rounds
+                {
+                    itemLCount += 1;
+                }
+                UpdateItemCounts();
+                await SaveGameStateAsync();
+                await RestartGame();
+            }
+            else if (guesses == 6) // if all guesses are used up
+            {
+                await DisplayAlert("No Guesses Remaining", $"You have not guessed the correct word: {selectedWord}. Press continue to move on to the next word.", "Continue");
+                roundNum = 0;
+                ResetHistoryGrid();
+                await SaveGameStateAsync();
+                await RestartGame();
+            }
+        }
+
+        private void ResetHistoryGrid() //Resets the history grid to 0 for every value
+        {
+            for (int i = 0; i < historyGrid.Length; i++)
+            {
+                for (int j = 0; j < historyGrid[i].Length; j++)
+                {
+                    historyGrid[i][j] = "";
+                }
+            }
+        }
+        public async Task RestartGame()
+        {
+            guessEntries.Clear();
+            await SaveGameStateAsync();
+            selectedWord = GetRandomWord();
+            await SaveGameStateAsync();
+            await InitializeGame();
+        }
+        Frame GetFrameAtPosition(int row, int column)
+        {
+            foreach (var child in wordGrid.Children) // Loop through all children in grid
+            {
+                if (wordGrid.GetRow(child) == row && wordGrid.GetColumn(child) == column && child is Frame frame) // Check if child is a frame and if it is at the specified position in the grid
+                {
+                    return frame;
+                }
+            }
+            return null;
         }
         // Create a frame for displaying a letter, with specified background color
         private Frame CreateLetterFrame(char letter, Color bgColor)
@@ -217,9 +379,11 @@ namespace Project2A
                 Content = new Label
                 {
                     Text = letter.ToString(),
-                    FontSize = 30,
+                    FontSize = 24,
                     HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center
+                    VerticalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
                 },
                 BorderColor = Colors.Black,
                 Padding = new Thickness(10),
@@ -227,47 +391,264 @@ namespace Project2A
                 HasShadow = true,
                 BackgroundColor = bgColor,
                 HeightRequest = 80,
+                WidthRequest = 80,
             };
         }
         //gets background & audio colour for letter
         private async Task<Color> GetLetterColorAsync(char letter, string selectedWord, int index)
-
         {
             Color bgColor;
-            if (letter == selectedWord[index])
+            Debug.WriteLine($"{index}");
+            String roundIndexString = "";
+            try
             {
-                bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
-                await player.CreateAudioPlayer("GreenLetter.mp3");
-            }
-            else if (selectedWord.Contains(letter))
-            {
-                bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
-                await player.CreateAudioPlayer("YellowLetter.mp3");
-            }
-            else
-            {
-                bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
-                await player.CreateAudioPlayer("GrayLetter.mp3");
-            }
-            return bgColor;
-        }
-        //Handler for submitting a guess
-        public async void GuessSubmission(string enteredWord)
-        {
-            if (!string.IsNullOrWhiteSpace(enteredWord))
-            {
-                string word = enteredWord.ToUpper();
-                if (IsValidWord(word))
+                if (index >= 0 && index < selectedWord.Length)
                 {
-                    guessEntries.Add(word);
-                    await GameStateSerializer.SaveEntriesAsync(guessEntries);
+                    if (roundNum >= 0 && roundNum < historyGrid.Length) // Check if roundNum is within range
+                    {
+                        if (letter == selectedWord[index])
+                        {
+                            bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
+                            await player.CreateAudioPlayer("GreenLetter.mp3");
+                            historyGrid[roundNum][guesses] += "3"; // 3 = Green for correct letter
+                            ChangeButtonColor(letter, Color.FromArgb("#66eb23"));
+                        }
+                        else if (selectedWord.Contains(letter))
+                        {
+                            bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
+                            await player.CreateAudioPlayer("YellowLetter.mp3");
+                            historyGrid[roundNum][guesses] += "2"; // 2 = Yellow for letter in word but wrong position
+                            ChangeButtonColor(letter, Color.FromArgb("#ebed51"));
+
+                        }
+                        else
+                        {
+                            bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
+                            await player.CreateAudioPlayer("GrayLetter.mp3");
+                            historyGrid[roundNum][guesses] += "1"; // 1 = Gray for incorrect letter
+                            ChangeButtonColor(letter, Color.FromArgb("#ecf7e6"));
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine("roundNum is out of range.");
+                        bgColor = Color.FromArgb("#ecf7e6"); // Default color
+                    }
+                    await SaveGameStateAsync(); // Save game state after updating variables
+                    return bgColor;
                 }
-                CreateWord(selectedWord, word, false);
+                else
+                {
+                    return Color.FromArgb("#ecf7e6"); // Default color
+                    RestartGame();
+                }
+            }
+            catch (Exception ex)
+            {
+                return Color.FromArgb("#ecf7e6"); // Default color in case of error
             }
         }
         private void OnKeyClicked(object sender, EventArgs e)
         {
             keyHandling.OnKeyClicked(sender, e);
+        }
+        private async void ItemR(object sender, EventArgs e) // ItemR will change two letters on the keyboard to green
+        {
+            if (itemRCount > 0)
+            {
+                itemRCount -= 1;
+                Debug.WriteLine($"ItemR called. selectedWord: {selectedWord}");
+                if (!string.IsNullOrEmpty(selectedWord) && selectedWord.Length == 5)
+                {
+                    Random random = new Random();
+                    int randomIndex = random.Next(selectedWord.Length);
+                    int randomIndex2 = random.Next(selectedWord.Length);
+                    while (randomIndex == randomIndex2)
+                        randomIndex2 = random.Next(selectedWord.Length);
+                    char randomLetter = char.ToUpper(selectedWord[randomIndex]);
+                    ChangeButtonColor(randomLetter, Color.FromArgb("#66eb23")); // Green color
+                    randomLetter = char.ToUpper(selectedWord[randomIndex2]);
+                    ChangeButtonColor(randomLetter, Color.FromArgb("#66eb23")); // Green color
+                    await player.CreateAudioPlayer("itemRUsed.mp3");
+                    await player.PlayAudio();
+                    UpdateItemCounts();
+                }
+            }
+            else
+            {
+                await ItemRButton.ScaleTo(1.2, 100);
+                await player.CreateAudioPlayer("itemFailed.mp3");
+                await player.PlayAudio();
+                await ItemRButton.ScaleTo(1.0, 100);
+            }
+        }
+
+        private async void ItemL(object sender, EventArgs e)// item l will skip a round entirely guessing the correct word,
+        {
+            if (itemLCount > 0)
+            {
+                Debug.WriteLine($"iteml called.");
+                GuessSubmission(selectedWord);
+                itemLCount -= 1;
+                await player.CreateAudioPlayer("itemLUsed.mp3");
+                await player.PlayAudio();
+                UpdateItemCounts();
+            }
+            else
+            {
+                await ItemLButton.ScaleTo(1.2, 100);
+                await player.CreateAudioPlayer("itemFailed.mp3");
+                await player.PlayAudio();
+                await ItemLButton.ScaleTo(1.0, 100);
+
+            }
+        }
+        private async void UpdateItemCounts() //Updates the items counts
+        {
+            LabelL.Text = $"{itemLCount}";
+            Debug.WriteLine($"Item L Count: {itemLCount}");
+            LabelR.Text = $"{itemRCount}";
+            Debug.WriteLine($"Item R Count: {itemRCount}");
+            if (itemLCount == 0)
+            {
+                ItemLButton.BackgroundColor = Color.FromArgb("#AA4A44"); // Red Color
+            }
+            else
+            {
+                ItemLButton.BackgroundColor = Color.FromArgb("#DAF7A6"); // Light Yellow
+            }
+            if (itemRCount == 0)
+            {
+                ItemRButton.BackgroundColor = Color.FromArgb("#AA4A44"); // Red Color
+            }
+            else
+            {
+                ItemRButton.BackgroundColor = Color.FromArgb("#DAF7A6"); // Light Yellow
+            }
+        }
+
+        //Both this and  ChangeAllButtonColors are methods I wanted to have in KeyHandling however I ran out of time to move cleanly,
+        private void ChangeButtonColor(char letter, Color backgroundColor)
+        {
+            Button button = null;
+            switch (letter) // Switch case for each letter
+            {
+                case 'A':
+                    button = ButtonA;
+                    break;
+                case 'B':
+                    button = ButtonB;
+                    break;
+                case 'C':
+                    button = ButtonC;
+                    break;
+                case 'D':
+                    button = ButtonD;
+                    break;
+                case 'E':
+                    button = ButtonE;
+                    break;
+                case 'F':
+                    button = ButtonF;
+                    break;
+                case 'G':
+                    button = ButtonG;
+                    break;
+                case 'H':
+                    button = ButtonH;
+                    break;
+                case 'I':
+                    button = ButtonI;
+                    break;
+                case 'J':
+                    button = ButtonJ;
+                    break;
+                case 'K':
+                    button = ButtonK;
+                    break;
+                case 'L':
+                    button = ButtonL;
+                    break;
+                case 'M':
+                    button = ButtonM;
+                    break;
+                case 'N':
+                    button = ButtonN;
+                    break;
+                case 'O':
+                    button = ButtonO;
+                    break;
+                case 'P':
+                    button = ButtonP;
+                    break;
+                case 'Q':
+                    button = ButtonQ;
+                    break;
+                case 'R':
+                    button = ButtonR;
+                    break;
+                case 'S':
+                    button = ButtonS;
+                    break;
+                case 'T':
+                    button = ButtonT;
+                    break;
+                case 'U':
+                    button = ButtonU;
+                    break;
+                case 'V':
+                    button = ButtonV;
+                    break;
+                case 'W':
+                    button = ButtonW;
+                    break;
+                case 'X':
+                    button = ButtonX;
+                    break;
+                case 'Y':
+                    button = ButtonY;
+                    break;
+                case 'Z':
+                    button = ButtonZ;
+                    break;
+                default:
+                    break;
+            }
+
+            if (button != null && button.BackgroundColor != Color.FromArgb("#66eb23")) // If button is not already green change to yellow
+            {
+                button.BackgroundColor = backgroundColor;
+            }
+        }
+
+        private void ChangeAllButtonColors(Color backgroundColor)
+        {
+            ButtonQ.BackgroundColor = backgroundColor;
+            ButtonW.BackgroundColor = backgroundColor;
+            ButtonE.BackgroundColor = backgroundColor;
+            ButtonR.BackgroundColor = backgroundColor;
+            ButtonT.BackgroundColor = backgroundColor;
+            ButtonY.BackgroundColor = backgroundColor;
+            ButtonU.BackgroundColor = backgroundColor;
+            ButtonI.BackgroundColor = backgroundColor;
+            ButtonO.BackgroundColor = backgroundColor;
+            ButtonP.BackgroundColor = backgroundColor;
+            ButtonA.BackgroundColor = backgroundColor;
+            ButtonS.BackgroundColor = backgroundColor;
+            ButtonD.BackgroundColor = backgroundColor;
+            ButtonF.BackgroundColor = backgroundColor;
+            ButtonG.BackgroundColor = backgroundColor;
+            ButtonH.BackgroundColor = backgroundColor;
+            ButtonJ.BackgroundColor = backgroundColor;
+            ButtonK.BackgroundColor = backgroundColor;
+            ButtonL.BackgroundColor = backgroundColor;
+            ButtonZ.BackgroundColor = backgroundColor;
+            ButtonX.BackgroundColor = backgroundColor;
+            ButtonC.BackgroundColor = backgroundColor;
+            ButtonV.BackgroundColor = backgroundColor;
+            ButtonB.BackgroundColor = backgroundColor;
+            ButtonN.BackgroundColor = backgroundColor;
+            ButtonM.BackgroundColor = backgroundColor;
         }
     }
 }

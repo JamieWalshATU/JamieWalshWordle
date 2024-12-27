@@ -60,7 +60,15 @@ splashSplashScreen.scale-400.png
 AboutAssets.txt
 GrayLetter.mp3
 GreenLetter.mp3
+history.png
+item_l_icon.png
+item_r_icon.png
+itemFailed.mp3
+itemLUsed.mp3
+itemRUsed.mp3
 LevelPassed.mp3
 LevelUpBonus.mp3
 LevelUpWithHint.mp3
+multiplayer.png
+player.png
 YellowLetter.mp3

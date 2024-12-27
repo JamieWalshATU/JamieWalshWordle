@@ -6,11 +6,20 @@ namespace Project2A
     public class SortedWords
     {
         //Creates a list to hold sorted words
-        private List<string> _wordListSorted = new List<string>();
-        public List<string> WordListSorted
+        private List<string> _wordListSorted = new List<string>(); //List to hold sorted words
+        public List<string> WordListSorted 
         {
             get => _wordListSorted;
             set => _wordListSorted = value;
+        }
+        private static SortedWords _instance; //Singleton instance of SortedWords class to avoid multiple instances of the class,   
+        public static SortedWords GetInstance(WordViewModel wordViewModel) 
+        {
+            if (_instance == null)
+            {
+                _instance = new SortedWords(wordViewModel);
+            }
+            return _instance;
         }
 
         private readonly WordViewModel _wordViewModel;
@@ -47,6 +56,26 @@ namespace Project2A
             {
                 Debug.WriteLine("WordList is empty or null.");
             }
+        }
+        public async Task<List<string>> MultiplayerWords()
+        {
+            Random random = new Random();
+            List<string> multiplayerWords = new List<string>();
+            var multiplayerListCopy = new List<string>(_wordViewModel.WordList);
+
+            //Selects 30 words
+            for (int i = 0; i < 30 && multiplayerListCopy.Count > 0; i++)
+            {
+                int randomIndex = random.Next(multiplayerListCopy.Count);
+                multiplayerWords.Add(multiplayerListCopy[randomIndex]);
+                multiplayerListCopy.RemoveAt(randomIndex);
+            }
+            return multiplayerWords;
+
+        }
+        public bool Remove(string word)
+        {
+            return WordListSorted.Remove(word); // Removes the word from the list
         }
     }
 }
