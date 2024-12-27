@@ -57,26 +57,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\item_l_icon.png" />
-	  <MauiImage Remove="Resources\Images\item_r_icon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Resources\Raw\GrayLetter.mp3" />
 	  <None Remove="Resources\Raw\GreenLetter.mp3" />
 	  <None Remove="Resources\Raw\LevelPassed.mp3" />
 	  <None Remove="Resources\Raw\LevelUpBonus.mp3" />
 	  <None Remove="Resources\Raw\LevelUpWithHint.mp3" />
 	  <None Remove="Resources\Raw\YellowLetter.mp3" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiAsset Include="Resources\Images\item_l_icon.png">
-	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-	  </MauiAsset>
-	  <MauiAsset Include="Resources\Images\item_r_icon.png">
-	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-	  </MauiAsset>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -87,13 +73,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="DebugPage.xaml.cs">
-	    <DependentUpon>DebugPage.xaml</DependentUpon>
+	  <Compile Update="SettingsPage.xaml.cs">
+	    <DependentUpon>SettingsPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="DebugPage.xaml">
+	  <MauiXaml Update="SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="FlyOutPage.xaml">

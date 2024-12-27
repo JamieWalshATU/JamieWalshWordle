@@ -12,6 +12,7 @@
             <FileImageSource x:Key="IconOne" File="player.png" />
             <FileImageSource x:Key="IconTwo" File="multiplayer.png" />
             <FileImageSource x:Key="IconThree" File="history.png" />
+            <FileImageSource x:Key="IconFour" File="history.png" />
         </ResourceDictionary>
     </Shell.Resources>
     <FlyoutItem Title="Single Player" FlyoutIcon="{StaticResource IconOne}">
@@ -31,6 +32,12 @@
             Title="Stats"
             ContentTemplate="{DataTemplate local:PlayerHistory}"
             Route="ThreePage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Settings" FlyoutIcon="{StaticResource IconFour}">
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate local:SettingsPage}"
+            Route="FourPage" />
     </FlyoutItem>
 </Shell>
  

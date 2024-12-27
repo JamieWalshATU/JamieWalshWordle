@@ -58,7 +58,7 @@ namespace Project2A
         private async Task NavigateToDebugMenu() //Navigates to the debug menu
         {
             // Navigate to the debug menu page
-            await Navigation.PushAsync(new DebugMenuPage());
+            await Navigation.PushAsync(new SettingsPage());
         }
         private async Task NavigateToPlayerHistroy() //Navigates to the PlayerHistory menu
         {
@@ -295,12 +295,12 @@ namespace Project2A
         }
         private async Task HandleGuessResult(string word, string selectedWord)
         {
-            if (word == "DEBUG")  // If user enters "DEBUG" in the game a seperate page is opened
-            {
-                await DisplayAlert("Debug Mode", "Entering debug menu...", "Continue");
-                await NavigateToDebugMenu();
-                return;
-            }
+            //if (word == "DEBUG")  // If user enters "DEBUG" in the game a seperate page is opened
+            //{
+            //    await DisplayAlert("Debug Mode", "Entering debug menu...", "Continue");
+            //    await NavigateToDebugMenu();
+            //    return;
+            //}
             if (CheckForWin(word, selectedWord)) // If word is correct
             {
                 correctGuesses.Add(word); // Add correct guess to the list

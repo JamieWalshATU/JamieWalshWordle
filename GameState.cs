@@ -14,7 +14,7 @@ namespace Project2A
         public string[][] HistoryArr { get; set; } = new string[30][];
         public List<string> CorrectGuesses { get; set; } = new List<string>();
 
-        public string PlayerName { get; set; } = string.Empty;
+        public string PlayerName { get; set; } = "Please enter player name";
 
         public int TotalGuesses { get; set; } = 0;
         public int ItemLCount { get; set; } = 0;
