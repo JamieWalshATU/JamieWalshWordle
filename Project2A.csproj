@@ -85,6 +85,9 @@
 	  <MauiXaml Update="FlyOutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Multiplayer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PlayerHistory.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

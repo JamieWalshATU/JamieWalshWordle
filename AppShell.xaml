@@ -23,7 +23,7 @@
     <FlyoutItem Title="Multiplayer" FlyoutIcon="{StaticResource IconTwo}">
         <ShellContent
             Title="Multiplayer"
-            ContentTemplate="{DataTemplate local:PlayerHistory}"
+            ContentTemplate="{DataTemplate local:Multiplayer}"
             Route="TwoPage" />
     </FlyoutItem>
     <FlyoutItem Title="Stats" FlyoutIcon="{StaticResource IconThree}">

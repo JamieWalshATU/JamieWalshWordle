@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace Project2A
 {
     //Event delegates used here to avoid making GuessSubmission() in Mainpage static, will likely be changed later
-    public class KeyHandling
+    public class KeyHandlingMulti
 
     {
-        MainPage MainPage { get; set; }
+        MainPage Multiplayer { get; set; }
         public event Action<string> KeyClickedEvent;
 
-        public Label EntryLabel { get; set; }
+        public Label EntryLabelMulti { get; set; }
 
         string enteredWord = "";
         public async void OnKeyClicked(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace Project2A
                     {
                         enteredWord = enteredWord.Remove(enteredWord.Length - 1);
                         Debug.WriteLine($"Entered Word:{enteredWord}");
-                        EntryLabel.Text = enteredWord;
+                        EntryLabelMulti.Text = enteredWord;
                     }
                 }
                 else // Any Key Pressed
@@ -48,7 +48,7 @@ namespace Project2A
                     {
                         enteredWord += key;
                         Debug.WriteLine($"Entered Word:{enteredWord}");
-                        EntryLabel.Text = enteredWord;
+                        EntryLabelMulti.Text = enteredWord;
                     }
                     else
                     {

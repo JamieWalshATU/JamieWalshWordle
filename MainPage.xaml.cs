@@ -24,7 +24,7 @@ namespace Project2A
             string[][] jaggedArray = new string[30][];
             for (int i = 0; i < jaggedArray.Length; i++)
             {
-                jaggedArray[i] = new string[6]; 
+                jaggedArray[i] = new string[6];
             }
             return jaggedArray;
         }
@@ -49,6 +49,22 @@ namespace Project2A
             historyGrid = CreateArray();
         }
 
+        //Initializes or Re-Initializes the game on page appearing
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await InitializeGame();
+        }
+        private async Task NavigateToDebugMenu() //Navigates to the debug menu
+        {
+            // Navigate to the debug menu page
+            await Navigation.PushAsync(new DebugMenuPage());
+        }
+        private async Task NavigateToPlayerHistroy() //Navigates to the PlayerHistory menu
+        {
+            // Navigate to the PlayerHistory menu page
+            await Navigation.PushAsync(new PlayerHistory());
+        }
         private async Task InitializeGame()
         {
             try
@@ -105,23 +121,6 @@ namespace Project2A
             }
         }
 
-        private async Task SaveGameStateAsync()
-        {
-            GameState gameState = new GameState
-            {
-                GuessEntries = guessEntries,
-                SelectedWord = selectedWord,
-                RoundNumString = roundNum.ToString(),
-                HistoryArr = historyGrid,
-                CorrectGuesses = correctGuesses,
-                TotalGuesses = totalGuesses,
-                ItemLCount = itemLCount,
-                ItemRCount = itemRCount
-            };
-
-            await GameStateSerializer.SaveGameStateAsync(gameState);
-        }
-
         //Creates a 6x5 Grid
         private void InitializeBlankGrid()
         {
@@ -142,6 +141,23 @@ namespace Project2A
             }
 
         }
+        private async Task SaveGameStateAsync()
+        {
+            GameState gameState = new GameState
+            {
+                GuessEntries = guessEntries,
+                SelectedWord = selectedWord,
+                RoundNumString = roundNum.ToString(),
+                HistoryArr = historyGrid,
+                CorrectGuesses = correctGuesses,
+                TotalGuesses = totalGuesses,
+                ItemLCount = itemLCount,
+                ItemRCount = itemRCount
+            };
+
+            await GameStateSerializer.SaveGameStateAsync(gameState);
+        }
+
         private async Task<string> GetSelectedWord()
         {
             GameState gameState = await GameStateSerializer.LoadGameStateAsync();
@@ -181,20 +197,21 @@ namespace Project2A
                 }
             }
         }
-        //Checks if the entry is 5 alpabetic letters for error handling
-        private bool IsValidWord(string word)
-        {
-            return word.Length == 5 && word.All(c => Char.IsLetter(c));
-        }
 
-        //Initializes or Re-Initializes the game on page appearing
-        protected override async void OnAppearing()
+        //Handler for submitting a guess
+        public async void GuessSubmission(string enteredWord)
         {
-            base.OnAppearing();
-            await InitializeGame();
+            if (!string.IsNullOrWhiteSpace(enteredWord))
+            {
+                string word = enteredWord.ToUpper();
+                if (IsValidWord(word))
+                {
+                    guessEntries.Add(word);
+                    await SaveGameStateAsync();
+                }
+                CreateWord(selectedWord, word, false);
+            }
         }
-
-        //User Entry to Grid-UI
         public async void CreateWord(String selectedWord, String guessedWord, Boolean loadingEntry) //Creates the word in the grid, loadingEntry is used to determine if the game is loading or if the user is inputting a word
         {
             Debug.WriteLine("createWord called with selectedWord: " + selectedWord);
@@ -254,18 +271,28 @@ namespace Project2A
                 await DisplayAlert("Invalid Entry", "Please enter a valid 5 letter word", "Try Again");
             }
         }
-        Frame GetFrameAtPosition(int row, int column)
+        //Checks if the entry is 5 alpabetic letters for error handling
+        private bool IsValidWord(string word)
         {
-            foreach (var child in wordGrid.Children) // Loop through all children in grid
-            {
-                if (wordGrid.GetRow(child) == row && wordGrid.GetColumn(child) == column && child is Frame frame) // Check if child is a frame and if it is at the specified position in the grid
-                {
-                    return frame;
-                }
-            }
-            return null;
+            return word.Length == 5 && word.All(c => Char.IsLetter(c));
         }
-
+        private async void RemoveWordFromList()
+        {
+            if (sortedWords.Remove(selectedWord)) // Remove word from shared list
+            {
+                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}"); // If word is found in list
+            }
+            else
+            {
+                Debug.WriteLine($"Word '{selectedWord}' not found in list."); // If word is not found in list
+            }
+            await SaveGameStateAsync();
+        }
+        //Checks if guessed word is the same as the selected word
+        private bool CheckForWin(string word, string selectedWord)
+        {
+            return word == selectedWord;
+        }
         private async Task HandleGuessResult(string word, string selectedWord)
         {
             if (word == "DEBUG")  // If user enters "DEBUG" in the game a seperate page is opened
@@ -309,20 +336,10 @@ namespace Project2A
             {
                 await DisplayAlert("No Guesses Remaining", $"You have not guessed the correct word: {selectedWord}. Press continue to move on to the next word.", "Continue");
                 roundNum = 0;
-                ResetHistoryGrid(); 
+                ResetHistoryGrid();
                 await SaveGameStateAsync();
                 await RestartGame();
             }
-        }
-        private async Task NavigateToDebugMenu() //Navigates to the debug menu
-        {
-            // Navigate to the debug menu page
-            await Navigation.PushAsync(new DebugMenuPage());
-        }
-        private async Task NavigateToPlayerHistroy() //Navigates to the PlayerHistory menu
-        {
-            // Navigate to the PlayerHistory menu page
-            await Navigation.PushAsync(new PlayerHistory());
         }
 
         private void ResetHistoryGrid() //Resets the history grid to 0 for every value
@@ -335,7 +352,6 @@ namespace Project2A
                 }
             }
         }
-        //Clears entries and selects a new word
         public async Task RestartGame()
         {
             guessEntries.Clear();
@@ -344,10 +360,16 @@ namespace Project2A
             await SaveGameStateAsync();
             await InitializeGame();
         }
-        //Checks if guessed word is the same as the selected word
-        private bool CheckForWin(string word, string selectedWord)
+        Frame GetFrameAtPosition(int row, int column)
         {
-            return word == selectedWord;
+            foreach (var child in wordGrid.Children) // Loop through all children in grid
+            {
+                if (wordGrid.GetRow(child) == row && wordGrid.GetColumn(child) == column && child is Frame frame) // Check if child is a frame and if it is at the specified position in the grid
+                {
+                    return frame;
+                }
+            }
+            return null;
         }
         // Create a frame for displaying a letter, with specified background color
         private Frame CreateLetterFrame(char letter, Color bgColor)
@@ -394,7 +416,7 @@ namespace Project2A
                             await player.CreateAudioPlayer("YellowLetter.mp3");
                             historyGrid[roundNum][guesses] += "2"; // 2 = Yellow for letter in word but wrong position
                             ChangeButtonColor(letter, Color.FromArgb("#ebed51"));
-                            
+
                         }
                         else
                         {
@@ -421,20 +443,6 @@ namespace Project2A
             catch (Exception ex)
             {
                 return Color.FromArgb("#ecf7e6"); // Default color in case of error
-            }
-        }
-        //Handler for submitting a guess
-        public async void GuessSubmission(string enteredWord)
-        {
-            if (!string.IsNullOrWhiteSpace(enteredWord))
-            {
-                string word = enteredWord.ToUpper();
-                if (IsValidWord(word))
-                {
-                    guessEntries.Add(word);
-                    await SaveGameStateAsync();
-                }
-                CreateWord(selectedWord, word, false);
             }
         }
         private void OnKeyClicked(object sender, EventArgs e)
@@ -516,23 +524,10 @@ namespace Project2A
             }
         }
 
-        private async void RemoveWordFromList()
-        {
-            if (sortedWords.Remove(selectedWord)) // Remove word from shared list
-            {
-                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}"); // If word is found in list
-            }
-            else
-            {
-                Debug.WriteLine($"Word '{selectedWord}' not found in list."); // If word is not found in list
-            }
-            await SaveGameStateAsync();
-        }
-
-
+        //Both this and  ChangeAllButtonColors are methods I wanted to have in KeyHandling however I ran out of time to move cleanly,
         private void ChangeButtonColor(char letter, Color backgroundColor)
         {
-            Button button = null; 
+            Button button = null;
             switch (letter) // Switch case for each letter
             {
                 case 'A':

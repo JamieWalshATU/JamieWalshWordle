@@ -4,6 +4,20 @@ using Microsoft.Maui.Controls;
 namespace Project2A;
 public partial class PlayerHistory : ContentPage
 {
+
+    // Every guess in a round is stored in 3d array of strings, where 1 through 3 is the values of the letters in that round,
+    //
+    // So guesses in a round could be represented by:
+    // 11111, where all letters were wrong,
+    // 11112, where the last letter was correct but in the wrong position,
+    // 33333, where the answer was correct,
+    //
+    // The functions below read actual data from the array, anything that is null or 0 wont be accepted,
+    //
+    // An Inner Grid will display frames horizontally which correspond the string values
+    // An Outer Grid will display these Inner Grids vertically
+    // These are all added to a StackLayout
+
     private string[][] historyGrid; // Jagged array to track user progress for a UI Element
     List<string> correctGuesses = new List<string>(); // List of correct guesses
     int roundNum; // Number of Round
@@ -23,7 +37,7 @@ public partial class PlayerHistory : ContentPage
         mainPage = new MainPage();
         int i = 0;
         UpdateCounters();
-        while (i < historyGrid.Length && historyGrid[i][0] != null)
+        while (i < historyGrid.Length && historyGrid[i][0] != null) //Only accepts data this isnt null
         {
             CreateGrid(i);
             i++;
@@ -60,7 +74,7 @@ public partial class PlayerHistory : ContentPage
             {
                 if ((Int32.Parse(historyGrid[i][j][0].ToString()) != 0)) // Checking first characcter, 0 means no useful data
                 {
-                    sizeCounter++;
+                    sizeCounter++; // Counts up to when actual data ends,
                 }
             }
         }
@@ -88,7 +102,7 @@ public partial class PlayerHistory : ContentPage
             Color bgColor = Color.FromArgb("#FFFFFF"); //White for default
             for (int col = 0; col < 5; col++) // 5 columns for letters
             {
-                char x = historyGrid[i][row][col];
+                char x = historyGrid[i][row][col]; // Seperates the strings into characters, where i is the roundNumber, row is guess in that roumd, and col is the index of the character
                 switch (x)
                 {
                     case '3':

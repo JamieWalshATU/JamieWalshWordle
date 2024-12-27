@@ -20,7 +20,7 @@ namespace Project2A
             this.httpClient = httpClient ?? new HttpClient(); 
         }
         // Method to load words from a local file or fetch them from API
-        public async Task GetWords()
+        public async Task GetWords() // Pulls Words from API
         {
             string appData = FileSystem.AppDataDirectory;
             string filePath = Path.Combine(appData, "wordlist.json");

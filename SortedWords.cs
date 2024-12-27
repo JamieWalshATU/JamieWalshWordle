@@ -57,6 +57,22 @@ namespace Project2A
                 Debug.WriteLine("WordList is empty or null.");
             }
         }
+        public async Task<List<string>> MultiplayerWords()
+        {
+            Random random = new Random();
+            List<string> multiplayerWords = new List<string>();
+            var multiplayerListCopy = new List<string>(_wordViewModel.WordList);
+
+            //Selects 30 words
+            for (int i = 0; i < 30 && multiplayerListCopy.Count > 0; i++)
+            {
+                int randomIndex = random.Next(multiplayerListCopy.Count);
+                multiplayerWords.Add(multiplayerListCopy[randomIndex]);
+                multiplayerListCopy.RemoveAt(randomIndex);
+            }
+            return multiplayerWords;
+
+        }
         public bool Remove(string word)
         {
             return WordListSorted.Remove(word); // Removes the word from the list

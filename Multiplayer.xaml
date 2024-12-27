@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project2A.Multiplayer"
+             Title="Multiplayer">
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="BorderColor" Value="Gray" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HasShadow" Value="True" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="MinimumWidthRequest" Value="40" />
+            <Setter Property="MinimumHeightRequest" Value="40" />
+            <Setter Property="BackgroundColor" Value="#007ACC" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <Grid x:Name="topGrid" RowSpacing="10" ColumnSpacing="10" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Frame Padding="160, 0, 160, 0" CornerRadius="5">
+                <Grid x:Name="wordGridMulti" RowSpacing="10" ColumnSpacing="10" Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Frame>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+                <Frame WidthRequest="100" HeightRequest="50">
+                    <Grid>
+                        <Label x:Name="EntryLabelMulti" />
+                    </Grid>
+                </Frame>
+                <Button Clicked="Button_Clicked" Text="Start Game"></Button>
+            </HorizontalStackLayout>
+            <!-- I know the document said dont create another keyboard, however for features I wanted to add to the game it was the route I wanted to take as I can have abilities and gameplay affect the keyboard which I cant do to a native IOS or Android Keyboard-->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Button x:Name="ButtonQ" Text="Q" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonW" Text="W" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonE" Text="E" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonR" Text="R" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonT" Text="T" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonY" Text="Y" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonU" Text="U" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonI" Text="I" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonO" Text="O" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonP" Text="P" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="20,0,0,0">
+                <Button x:Name="ButtonA" Text="A" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonS" Text="S" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonD" Text="D" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonF" Text="F" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonG" Text="G" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonH" Text="H" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonJ" Text="J" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonK" Text="K" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button x:Name="ButtonL" Text="L" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="50,0,0,0">
+                <Button x:Name="ButtonZ" Text="Z" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonX" Text="X" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonC" Text="C" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonV" Text="V" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonB" Text="B" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonN" Text="N" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+                <Button x:Name="ButtonM" Text="M" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
+                <Button Text="Delete" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Red" TextColor="White" Clicked="OnKeyClicked" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="10,0,0,0">
+                <Button Text="Enter" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Green" TextColor="White" Clicked="OnKeyClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
