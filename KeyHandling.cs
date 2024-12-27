@@ -12,10 +12,13 @@ namespace Project2A
     public class KeyHandling
 
     {
+        MainPage MainPage { get; set; }
         public event Action<string> KeyClickedEvent;
 
+        public Label EntryLabel { get; set; }
+
         string enteredWord = "";
-        public void OnKeyClicked(object sender, EventArgs e)
+        public async void OnKeyClicked(object sender, EventArgs e)
         {
             if (sender is Button button)
             {
@@ -29,21 +32,31 @@ namespace Project2A
                         enteredWord = "";
                     }
 
-                } 
+                }
                 else if (key == "Delete") // Delete Pressed
                 {
                     if (enteredWord.Length > 0)
                     {
-                       enteredWord = enteredWord.Remove(enteredWord.Length - 1);
-                       Debug.WriteLine($"Entered Word:{enteredWord}");
+                        enteredWord = enteredWord.Remove(enteredWord.Length - 1);
+                        Debug.WriteLine($"Entered Word:{enteredWord}");
+                        EntryLabel.Text = enteredWord;
                     }
                 }
                 else // Any Key Pressed
                 {
-                    enteredWord += key;
-                    Debug.WriteLine($"Entered Word:{ enteredWord }");
+                    if (enteredWord.Length < 5)
+                    {
+                        enteredWord += key;
+                        Debug.WriteLine($"Entered Word:{enteredWord}");
+                        EntryLabel.Text = enteredWord;
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Word Too Long!", "Entry cannot be longer that 5 characters, please try again", "OK");
+
+                    }
                 }
-                    
+
             }
         }
     }

@@ -4,12 +4,33 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Project2A"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="Project2A">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <Shell.Resources>
+        <ResourceDictionary>
+            <FileImageSource x:Key="IconOne" File="player.png" />
+            <FileImageSource x:Key="IconTwo" File="multiplayer.png" />
+            <FileImageSource x:Key="IconThree" File="history.png" />
+        </ResourceDictionary>
+    </Shell.Resources>
+    <FlyoutItem Title="Single Player" FlyoutIcon="{StaticResource IconOne}">
+        <ShellContent
+            Title="Single Player"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="OnePage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Multiplayer" FlyoutIcon="{StaticResource IconTwo}">
+        <ShellContent
+            Title="Multiplayer"
+            ContentTemplate="{DataTemplate local:Multiplayer}"
+            Route="TwoPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Stats" FlyoutIcon="{StaticResource IconThree}">
+        <ShellContent
+            Title="Stats"
+            ContentTemplate="{DataTemplate local:PlayerHistory}"
+            Route="ThreePage" />
+    </FlyoutItem>
 </Shell>
+ 
