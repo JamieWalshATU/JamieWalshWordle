@@ -379,9 +379,11 @@ namespace Project2A
                 Content = new Label
                 {
                     Text = letter.ToString(),
-                    FontSize = 30,
+                    FontSize = 24,
                     HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center
+                    VerticalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
                 },
                 BorderColor = Colors.Black,
                 Padding = new Thickness(10),
@@ -389,6 +391,7 @@ namespace Project2A
                 HasShadow = true,
                 BackgroundColor = bgColor,
                 HeightRequest = 80,
+                WidthRequest = 80,
             };
         }
         //gets background & audio colour for letter
@@ -494,7 +497,7 @@ namespace Project2A
             else
             {
                 await ItemLButton.ScaleTo(1.2, 100);
-                await player.CreateAudioPlayer("itemfailed.mp3");
+                await player.CreateAudioPlayer("itemFailed.mp3");
                 await player.PlayAudio();
                 await ItemLButton.ScaleTo(1.0, 100);
 

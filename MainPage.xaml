@@ -29,10 +29,21 @@
             <Setter Property="BackgroundColor" Value="Transparent" />
         </Style>
     </ContentPage.Resources>
-    
+
     <ScrollView>
-        <VerticalStackLayout Padding="10">
-            <Grid x:Name="topGrid" RowSpacing="10" ColumnSpacing="10" Padding="10">
+        <Grid RowSpacing="10" ColumnSpacing="10" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="topGrid" Grid.Row="0" RowSpacing="10" ColumnSpacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -44,8 +55,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Frame Padding="160, 0, 160, 0" CornerRadius="5">
-                <Grid x:Name="wordGrid" RowSpacing="10" ColumnSpacing="10" Padding="10">
+            <Frame Grid.Row="1" Padding="0" CornerRadius="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid x:Name="wordGrid" RowSpacing="10" ColumnSpacing="10" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -64,7 +75,7 @@
                 </Grid>
             </Frame>
 
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center" Spacing="30">
                 <ImageButton x:Name ="ItemLButton" Source="item_r_icon.png" Clicked="ItemL"/>
                 <Frame WidthRequest="40" HeightRequest="40" BorderColor="Gray" CornerRadius="10" Padding="0">
                     <Label x:Name="LabelL" Text="0" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -77,45 +88,49 @@
                 <Frame WidthRequest="40" HeightRequest="40">
                     <Label x:Name="LabelR" Text="0" HorizontalOptions="Center" VerticalOptions="Center"/>
                 </Frame>
-                <ImageButton x:Name ="ItemRButton" Source="item_l_icon.png" Clicked="ItemR"/>
+                <ImageButton x:Name ="ItemRButton" Source="item_l_icon.pn}" Clicked="ItemR"/>
             </HorizontalStackLayout>
             <!-- I know the document said dont create another keyboard, however for features I wanted to add to the game it was the route I wanted to take as I can have abilities and gameplay affect the keyboard which I cant do to a native IOS or Android Keyboard-->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                <Button x:Name="ButtonQ" Text="Q" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonW" Text="W" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonE" Text="E" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonR" Text="R" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonT" Text="T" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonY" Text="Y" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonU" Text="U" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonI" Text="I" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonO" Text="O" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonP" Text="P" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
+            <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center" Spacing="5">
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <HorizontalStackLayout HorizontalOptions="Start" Spacing="3">
+                        <Button x:Name="ButtonQ" Text="Q" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonW" Text="W" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonE" Text="E" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonR" Text="R" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonT" Text="T" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonY" Text="Y" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonU" Text="U" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonI" Text="I" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonO" Text="O" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonP" Text="P" Clicked="OnKeyClicked"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="Start" Spacing="3" Padding="10,0,0,0">
+                        <Button x:Name="ButtonA" Text="A" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonS" Text="S" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonD" Text="D" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonF" Text="F" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonG" Text="G" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonH" Text="H" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonJ" Text="J" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonK" Text="K" Clicked="OnKeyClicked" />
+                        <Button x:Name="ButtonL" Text="L" Clicked="OnKeyClicked" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="3" Padding="15,0,0,0">
+                        <Button x:Name="ButtonZ" Text="Z" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonX" Text="X" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonC" Text="C" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonV" Text="V" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonB" Text="B" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonN" Text="N" Clicked="OnKeyClicked"/>
+                        <Button x:Name="ButtonM" Text="M" Clicked="OnKeyClicked"/>
+                        <Button Text="Delete" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Red" TextColor="White" Clicked="OnKeyClicked" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="10,0,0,0">
+                        <Button Text="Enter" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Green" TextColor="White" Clicked="OnKeyClicked" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
             </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="20,0,0,0">
-                <Button x:Name="ButtonA" Text="A" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonS" Text="S" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonD" Text="D" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonF" Text="F" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonG" Text="G" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonH" Text="H" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonJ" Text="J" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonK" Text="K" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button x:Name="ButtonL" Text="L" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="50,0,0,0">
-                <Button x:Name="ButtonZ" Text="Z" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonX" Text="X" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonC" Text="C" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonV" Text="V" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonB" Text="B" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonN" Text="N" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked"/>
-                <Button x:Name="ButtonM" Text="M" MinimumWidthRequest="40" MinimumHeightRequest="40" Clicked="OnKeyClicked" />
-                <Button Text="Delete" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Red" TextColor="White" Clicked="OnKeyClicked" />
-                </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="10,0,0,0">
-                <Button Text="Enter" MinimumWidthRequest="80" MinimumHeightRequest="40" BackgroundColor="Green" TextColor="White" Clicked="OnKeyClicked" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

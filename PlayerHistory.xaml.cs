@@ -66,6 +66,12 @@ public partial class PlayerHistory : ContentPage
     //HistoryGrid [roundNum][guesses], 3 green, 2 yellow, 1 gray
     private void CreateGrid(int i)
     {
+        if (i >= historyGrid.Length || i >= correctGuesses.Count)
+        {
+            Debug.WriteLine("Index out of range.");
+            Debug.WriteLine($"{i}");
+            return;
+        }
         Debug.WriteLine($"{historyGrid[i].Length}");
         int sizeCounter = 0;
         for (int j = 0; j < 5; j++) // Checks the length of actual data in the array, when the value is 0 or null, no actual data is beyond this point, size counter represents this

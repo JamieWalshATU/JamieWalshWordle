@@ -238,9 +238,11 @@ public partial class Multiplayer : ContentPage
             Content = new Label
             {
                 Text = letter.ToString(),
-                FontSize = 30,
+                FontSize = 24,
                 HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
             },
             BorderColor = Colors.Black,
             Padding = new Thickness(10),
@@ -248,6 +250,7 @@ public partial class Multiplayer : ContentPage
             HasShadow = true,
             BackgroundColor = bgColor,
             HeightRequest = 80,
+            WidthRequest = 80,
         };
     }
     Frame GetFrameAtPosition(int row, int column)
