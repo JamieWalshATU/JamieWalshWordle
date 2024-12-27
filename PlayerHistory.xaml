@@ -4,9 +4,19 @@
              x:Class="Project2A.PlayerHistory"
              Title="PlayerHistory">
     <ScrollView>
-        <StackLayout x:Name="container1" Spacing="0" Padding="0" WidthRequest="100" VerticalOptions="Start" HorizontalOptions="Start" Margin="10,0,0,0">
-            <Label x:Name="roundCounter" VerticalOptions="End" HorizontalOptions="End"></Label>
-            <Label x:Name="guessCounter" VerticalOptions="End" HorizontalOptions="End"></Label>
+        <StackLayout>
+            <Grid x:Name="TopGrid" Padding="10,10,10,10" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Entry Grid.Row="0" x:Name="PlayerNameLabel" TextChanged="OnPlayerNameChanged"></Entry>
+                <Label Grid.Row="1" x:Name="roundCounter" VerticalOptions="End" HorizontalOptions="End"></Label>
+                <Label Grid.Row="2" x:Name="guessCounter" VerticalOptions="End" HorizontalOptions="End"></Label>
+            </Grid>
+            <StackLayout x:Name="container1" Spacing="0" Padding="0" WidthRequest="100" VerticalOptions="Start" HorizontalOptions="Start" Margin="10,0,0,0">
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

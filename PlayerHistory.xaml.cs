@@ -20,6 +20,7 @@ public partial class PlayerHistory : ContentPage
 
     private string[][] historyGrid; // Jagged array to track user progress for a UI Element
     List<string> correctGuesses = new List<string>(); // List of correct guesses
+    string playerName;
     int roundNum; // Number of Round
     int totalGueses = 0; // Total Overall Guesses
 
@@ -37,8 +38,13 @@ public partial class PlayerHistory : ContentPage
         mainPage = new MainPage();
         int i = 0;
         UpdateCounters();
+
+        // Clear existing grids
+        container1.Children.Clear();
+
         while (i < historyGrid.Length && historyGrid[i][0] != null) //Only accepts data this isnt null
         {
+            // Creates new Grids
             CreateGrid(i);
             i++;
         }
@@ -61,6 +67,14 @@ public partial class PlayerHistory : ContentPage
         correctGuesses = gameState.CorrectGuesses;
         totalGueses = gameState.TotalGuesses;
         roundNum = Int32.Parse(gameState.RoundNumString);
+        if (playerName == null)
+        {
+            playerName = "Please enter Player's Name";
+        }
+        else
+        {
+            playerName = gameState.PlayerName;
+        }
     }
 
     //HistoryGrid [roundNum][guesses], 3 green, 2 yellow, 1 gray
@@ -156,7 +170,26 @@ public partial class PlayerHistory : ContentPage
 
     private async void UpdateCounters()
     {
+
+        PlayerNameLabel.Text = playerName;
         roundCounter.Text = "Rounds Won: " + roundNum.ToString();
         guessCounter.Text = "Total Guesses: " + totalGueses.ToString();
     }
+
+    private void SavePlayerName()
+    {
+        SaveGameStateAsync();
+    }
+    private async Task SaveGameStateAsync()
+    {
+        GameState gameState = await GameStateSerializer.LoadGameStateAsync();
+        gameState.PlayerName = PlayerNameLabel.Text;
+        await GameStateSerializer.SaveGameStateAsync(gameState);
+    }
+    private void OnPlayerNameChanged(object sender, TextChangedEventArgs e)
+    {
+        playerName = e.NewTextValue;
+        SavePlayerName();
+    }
+
 }
