@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     //SortedWords creates a collection of words and shuffles them
     public class SortedWords

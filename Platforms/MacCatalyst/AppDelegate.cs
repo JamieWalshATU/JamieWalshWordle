@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

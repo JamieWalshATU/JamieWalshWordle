@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     //Event delegates used here to avoid making GuessSubmission() in Mainpage static, will likely be changed later
     public class KeyHandling

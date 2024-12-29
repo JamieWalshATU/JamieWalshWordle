@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Diagnostics;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     //ViewModel class handles loading/saving of words
     public class WordViewModel

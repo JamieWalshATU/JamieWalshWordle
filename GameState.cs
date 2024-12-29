@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     public class GameState //GameState class to hold game state data
     {
@@ -26,6 +26,10 @@ namespace Project2A
             for (int i = 0; i < 30; i++)
             {
                 HistoryArr[i] = new string[6];
+            }
+            if (HistoryArr[0][0] == null)
+            {
+                HistoryArr[0][0] = "00000";
             }
         }
     }

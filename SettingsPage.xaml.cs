@@ -1,4 +1,4 @@
-namespace Project2A;
+namespace JamieWalshWordle;
 using Microsoft.Maui.Controls;
 public partial class SettingsPage : ContentPage
 {

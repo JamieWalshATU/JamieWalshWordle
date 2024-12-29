@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     public static class GameStateSerializer
     {
@@ -43,7 +43,6 @@ namespace Project2A
             }
             catch (Exception ex)
             {
-<<<<<<< HEAD
                 Debug.WriteLine("Error loading game state: " + ex.Message);
                 return new GameState();
             }
@@ -269,14 +268,5 @@ namespace Project2A
         //    }
         //    return loadedCorrectGuesses;
         //}
-=======
-                Debug.WriteLine("Error loading selected word");
-            }
-            return string.Empty;
-
-        }
-
->>>>>>> parent of c82af9d (Debug page, error handling, player history)
     }
-
 }

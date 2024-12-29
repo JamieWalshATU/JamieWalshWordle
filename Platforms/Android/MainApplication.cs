@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     [Application]
     public class MainApplication : MauiApplication

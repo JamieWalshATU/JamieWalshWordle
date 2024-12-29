@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using System.Timers;
-namespace Project2A;
+namespace JamieWalshWordle;
 
     // Alot of this code was added last minute and is a mess as a result, most of it has the same functionality as mainPage. Each player has a five minute turn to guess the same 4 words with a 5 minute timer, the lower the score the better
 public partial class Multiplayer : ContentPage

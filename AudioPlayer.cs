@@ -1,6 +1,6 @@
 ﻿using Plugin.Maui.Audio;
 //Basic Audio Player
-namespace Project2A
+namespace JamieWalshWordle
 {
     public partial class AudioPlayer
     {

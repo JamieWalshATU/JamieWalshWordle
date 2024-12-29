@@ -1,4 +1,4 @@
-﻿namespace Project2A
+﻿namespace JamieWalshWordle
 {
     public partial class App : Application
     {

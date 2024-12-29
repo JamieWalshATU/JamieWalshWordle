@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     public static class MauiProgram
     {

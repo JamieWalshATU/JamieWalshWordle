@@ -1,22 +1,19 @@
 ﻿using System.Diagnostics;
 using Microsoft.Maui.Storage;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     public partial class MainPage : ContentPage
     {
         private KeyHandling keyHandling;
-        
         private WordViewModel wordViewModel;
         private SortedWords sortedWords;
-        private string selectedWord;         // Selected word is a random chosen word from the sorted list, this is the word the user must guess.
-        
+        private string selectedWord;   // Selected word is a random chosen word from the sorted list, this is the word the user must guess.
         public int guesses;
         public int totalGuesses; // Tracks total guesses overall,
         public int itemLCount;
         public int itemRCount;
         List<string> guessEntries = new List<string>(); // List of all user-entries
-<<<<<<< HEAD
         List<string> correctGuesses = new List<string>(); // List of correct guesses
         private AudioPlayer player = new AudioPlayer(); //Audioplayer for sound
         int roundNum; // Number of Round
@@ -32,10 +29,6 @@ namespace Project2A
             }
             return jaggedArray;
         }
-=======
-
-        private AudioPlayer player = new AudioPlayer(); //Audioplayer for sound
->>>>>>> parent of c82af9d (Debug page, error handling, player history)
 
         Grid grid;
         public MainPage()
@@ -58,6 +51,8 @@ namespace Project2A
             wordViewModel = new WordViewModel(client);
             sortedWords = SortedWords.GetInstance(wordViewModel); // Use singleton instance of Sorted Words
             wordGrid = this.wordGrid; // Grid that displays guesses
+
+            historyGrid = CreateArray();
         }
 
         //Initializes or Re-Initializes the game on page appearing
@@ -98,7 +93,6 @@ namespace Project2A
                 // Load game state
                 GameState gameState = await GameStateSerializer.LoadGameStateAsync();
 
-<<<<<<< HEAD
                 // Set game state
                 selectedWord = gameState.SelectedWord;
                 roundNumString = gameState.RoundNumString;
@@ -131,19 +125,15 @@ namespace Project2A
             {
                 await RestartGame();
             }
-=======
-            //Loads previous guesses
-            await InitializeGuesses();
->>>>>>> parent of c82af9d (Debug page, error handling, player history)
         }
-        
+
         //Creates a 6x5 Grid
         private void InitializeBlankGrid()
         {
             wordGrid.Children.Clear();
             wordGrid.RowDefinitions.Clear();
 
-            for (int row = 0; row < 6; row++)  
+            for (int row = 0; row < 6; row++)
             {
                 wordGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
@@ -231,6 +221,18 @@ namespace Project2A
         public async void CreateWord(String selectedWord, String guessedWord, Boolean loadingEntry) //Creates the word in the grid, loadingEntry is used to determine if the game is loading or if the user is inputting a word
         {
             Debug.WriteLine("createWord called with selectedWord: " + selectedWord);
+
+            if (string.IsNullOrEmpty(selectedWord))
+            {
+                selectedWord = await GetSelectedWord();
+                if (string.IsNullOrEmpty(selectedWord))
+                {
+                    Debug.WriteLine("Selected word is still null");
+                    selectedWord = "ERROR";
+                    return;
+                }
+            }
+
             selectedWord = selectedWord.ToUpper();
             string word = guessedWord.ToUpper();
 
@@ -259,14 +261,19 @@ namespace Project2A
                     if (existingFrame != null)
 
                         if (!loadingEntry)// if this is an actual user input, the game will play audio and delay to inputs to form an animation, if the game is just laoding up these functions are ignored
-                    {
-                        await player.PlayAudio();
-                        await Task.Delay(500);
-                    }
+                        {
+                            await player.PlayAudio();
+                            await Task.Delay(500);
+                        }
+
+                    
                 }
                 Debug.WriteLine($"{historyGrid[roundNum][guesses]}");
                 guesses++;
-                totalGuesses++;
+                if (!loadingEntry == true)
+                { 
+                    totalGuesses++;
+                }
                 await HandleGuessResult(word, selectedWord);
                 await SaveGameStateAsync(); // Save game state after updating variables
             }
@@ -280,114 +287,18 @@ namespace Project2A
         {
             return word.Length == 5 && word.All(c => Char.IsLetter(c));
         }
-<<<<<<< HEAD
-=======
-
-        private async Task HandleGuessResult(string word, string selectedWord)
-        {
-            if (CheckForWin(word, selectedWord)) // If word is correct
-            {
-                await player.CreateAudioPlayer("LevelPassed.mp3");
-                await player.PlayAudio();
-                await DisplayAlert("Correct Word Guessed!", "You have guessed the correct word, press continue to move on to the next word", "Continue");
-                RemoveWordFromList();
-                await RestartGame();
-            }
-            else if (guesses == 6) // if all guesses are used up
-            {
-                await DisplayAlert("No Guesses Remaining", $"You have not guessed the correct word: {selectedWord}. Press continue to move on to the next word.", "Continue");
-                await RestartGame();
-            }
-        }
-        //Clears entries and selects a new word
-        private async Task RestartGame()
-        {
-            guessEntries.Clear();
-            await GameStateSerializer.SaveEntriesAsync(guessEntries);
-            selectedWord = GetRandomWord();
-            await GameStateSerializer.SaveSelectedWordAsync(selectedWord);
-            await InitializeGame();
-        }
-        //Checks if guessed word is the same as the selected word
-        private bool CheckForWin(string word, string selectedWord)
-        {
-            return word == selectedWord;
-        }
-        // Create a frame for displaying a letter, with specified background color
-        private Frame CreateLetterFrame(char letter, Color bgColor)
-        {
-            return new Frame
-            {
-                Content = new Label
-                {
-                    Text = letter.ToString(),
-                    FontSize = 30,
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center
-                },
-                BorderColor = Colors.Black,
-                Padding = new Thickness(10),
-                CornerRadius = 5,
-                HasShadow = true,
-                BackgroundColor = bgColor,
-                HeightRequest = 80,
-            };
-        }
-        //gets background & audio colour for letter
-        private async Task<Color> GetLetterColorAsync(char letter, string selectedWord, int index)
-
-        {
-            Color bgColor;
-            if (letter == selectedWord[index])
-            {
-                bgColor = Color.FromArgb("#66eb23"); // Green for correct letter
-                await player.CreateAudioPlayer("GreenLetter.mp3");
-            }
-            else if (selectedWord.Contains(letter))
-            {
-                bgColor = Color.FromArgb("#ebed51");  // Yellow for letter in word but wrong position
-                await player.CreateAudioPlayer("YellowLetter.mp3");
-            }
-            else
-            {
-                bgColor = Color.FromArgb("#ecf7e6");// Gray for incorrect letter
-                await player.CreateAudioPlayer("GrayLetter.mp3");
-            }
-            return bgColor;
-        }
-        //Handler for submitting a guess
-        public async void GuessSubmission(string enteredWord)
-        {
-            if (!string.IsNullOrWhiteSpace(enteredWord))
-            {
-                string word = enteredWord.ToUpper();
-                if (IsValidWord(word))
-                {
-                    guessEntries.Add(word);
-                    await GameStateSerializer.SaveEntriesAsync(guessEntries);
-                }
-                CreateWord(selectedWord, word, false);
-            }
-        }
-        private void OnKeyClicked(object sender, EventArgs e)
-        {
-            keyHandling.OnKeyClicked(sender, e);
-        }
-
->>>>>>> parent of c82af9d (Debug page, error handling, player history)
         private async void RemoveWordFromList()
         {
             if (sortedWords.Remove(selectedWord)) // Remove word from shared list
             {
-                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}");
+                Debug.WriteLine($"Word '{selectedWord}' removed. Remaining words: {sortedWords.WordListSorted.Count}"); // If word is found in list
             }
             else
             {
-                Debug.WriteLine($"Word '{selectedWord}' not found in list.");
+                Debug.WriteLine($"Word '{selectedWord}' not found in list."); // If word is not found in list
             }
             await SaveGameStateAsync();
         }
-<<<<<<< HEAD
         //Checks if guessed word is the same as the selected word
         private bool CheckForWin(string word, string selectedWord)
         {
@@ -750,7 +661,5 @@ namespace Project2A
             ButtonN.BackgroundColor = backgroundColor;
             ButtonM.BackgroundColor = backgroundColor;
         }
-=======
->>>>>>> parent of c82af9d (Debug page, error handling, player history)
     }
 }

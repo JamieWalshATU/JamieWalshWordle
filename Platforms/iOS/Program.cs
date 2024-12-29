@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Project2A
+namespace JamieWalshWordle
 {
     public class Program
     {

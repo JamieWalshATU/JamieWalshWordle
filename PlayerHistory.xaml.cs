@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.Maui.Controls;
 
-namespace Project2A;
+namespace JamieWalshWordle;
 public partial class PlayerHistory : ContentPage
 {
 
@@ -42,11 +42,18 @@ public partial class PlayerHistory : ContentPage
         // Clear existing grids
         container1.Children.Clear();
 
-        while (i < historyGrid.Length && historyGrid[i][0] != null) //Only accepts data this isnt null
+        try
         {
-            // Creates new Grids
-            CreateGrid(i);
-            i++;
+            while (i < historyGrid.Length && historyGrid[i][0] != null) //Only accepts data this isnt null
+            {
+                // Creates new Grids
+                CreateGrid(i);
+                i++;
+            }
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Error Occured", "An Error has occured, if this error persists save data may be corrupted ", "Ok");
         }
     }
     private string[][] CreateArray() // Creates a 30x6 array
@@ -80,8 +87,8 @@ public partial class PlayerHistory : ContentPage
     //HistoryGrid [roundNum][guesses], 3 green, 2 yellow, 1 gray
     private void CreateGrid(int i)
     {
-        if (i >= historyGrid.Length || i >= correctGuesses.Count)
-        {
+        if (historyGrid == null || i >= historyGrid.Length || correctGuesses == null || i >= correctGuesses.Count)
+            {
             Debug.WriteLine("Index out of range.");
             Debug.WriteLine($"{i}");
             return;
@@ -172,6 +179,7 @@ public partial class PlayerHistory : ContentPage
     {
 
         PlayerNameLabel.Text = playerName;
+        Debug.WriteLine("Counters updated");
         roundCounter.Text = "Rounds Won: " + roundNum.ToString();
         guessCounter.Text = "Total Guesses: " + totalGueses.ToString();
     }
