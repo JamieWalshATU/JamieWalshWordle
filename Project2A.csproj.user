@@ -11,6 +11,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <MauiXaml Update="SettingsPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -22,6 +23,8 @@
     </MauiXaml>
   </ItemGroup>
   <ItemGroup>
+=======
+>>>>>>> parent of c82af9d (Debug page, error handling, player history)
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>

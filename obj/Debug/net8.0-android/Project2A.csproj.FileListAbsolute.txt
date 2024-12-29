@@ -2110,3 +2110,4 @@ C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-android\resizetizer\r
 C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-android\resizetizer\r\drawable\item_r_icon.png
 C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-android\resizetizer\r\drawable\multiplayer.png
 C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-android\resizetizer\r\drawable\player.png
+C:\Users\Jamie\Documents\GitHub\Project2A\obj\Debug\net8.0-android\resizetizer\r\drawable\settings.png

@@ -33,7 +33,7 @@ public partial class SettingsPage : ContentPage
     private async Task DarkModeToggle()
     {
         AppTheme appTheme = Application.Current.RequestedTheme;
-        if (appTheme == AppTheme.Dark) { Application.Current.UserAppTheme = AppTheme.Light; Preferences.Default.Set("IsDarkMode", false); }
-        else { Application.Current.UserAppTheme = AppTheme.Dark; Preferences.Default.Set("IsDarkMode", true); };
+        if (appTheme == AppTheme.Dark) { Application.Current.UserAppTheme = AppTheme.Light; Preferences.Default.Set("isDarkMode", false); }
+        else { Application.Current.UserAppTheme = AppTheme.Dark; Preferences.Default.Set("isDarkMode", true); };
     }
 }

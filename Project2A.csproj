@@ -62,6 +62,7 @@
 	  <MauiAsset Remove="Resources\Raw\item_r_icon.png" />
 	  <MauiAsset Remove="Resources\Raw\multiplayer.png" />
 	  <MauiAsset Remove="Resources\Raw\player.png" />
+	  <MauiAsset Remove="Resources\Raw\settings.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,6 +80,7 @@
 	  <MauiImage Include="Resources\Raw\item_r_icon.png" />
 	  <MauiImage Include="Resources\Raw\multiplayer.png" />
 	  <MauiImage Include="Resources\Raw\player.png" />
+	  <MauiImage Include="Resources\Raw\settings.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -88,6 +90,7 @@
 		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
 	</ItemGroup>
 
+<<<<<<< HEAD
 	<ItemGroup>
 	  <Compile Update="SettingsPage.xaml.cs">
 	    <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -109,4 +112,6 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+=======
+>>>>>>> parent of c82af9d (Debug page, error handling, player history)
 </Project>

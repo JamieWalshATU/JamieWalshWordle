@@ -19,7 +19,7 @@
             <FileImageSource x:Key="IconOne" File="player.png"/>
             <FileImageSource x:Key="IconTwo" File="multiplayer.png" />
             <FileImageSource x:Key="IconThree" File="history.png" />
-            <FileImageSource x:Key="IconFour" File="history.png" />
+            <FileImageSource x:Key="IconFour" File="settings.png" />
         </ResourceDictionary>
     </Shell.Resources>
     <FlyoutItem Title="Single Player" FlyoutIcon="{StaticResource IconOne}">
