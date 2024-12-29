@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.Maui.Storage;
 
 namespace Project2A
 {
@@ -33,6 +34,11 @@ namespace Project2A
         public MainPage()
         {
             InitializeComponent();
+            if (Preferences.Default.Get("isDarkMode", false) == true)
+            {
+                AppTheme appTheme = Application.Current.RequestedTheme;
+                Application.Current.UserAppTheme = AppTheme.Dark;
+            }
 
             keyHandling = new KeyHandling
             {

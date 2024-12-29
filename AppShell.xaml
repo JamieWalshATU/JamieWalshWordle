@@ -7,9 +7,16 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Project2A">
 
+
     <Shell.Resources>
+        <Style TargetType="Image">
+            <Setter Property="BackgroundColor" Value="White"/>
+        </Style>
+        <Style TargetType="FlyoutPage">
+            <Setter Property="BackgroundColor" Value="Gray"/>
+        </Style>
         <ResourceDictionary>
-            <FileImageSource x:Key="IconOne" File="player.png" />
+            <FileImageSource x:Key="IconOne" File="player.png"/>
             <FileImageSource x:Key="IconTwo" File="multiplayer.png" />
             <FileImageSource x:Key="IconThree" File="history.png" />
             <FileImageSource x:Key="IconFour" File="history.png" />

@@ -3,6 +3,8 @@ using Microsoft.Maui.Controls;
 public partial class SettingsPage : ContentPage
 {
     private MainPage mainPage;
+
+    private int appThemeInt;
     public SettingsPage()
     {
         InitializeComponent();
@@ -10,8 +12,8 @@ public partial class SettingsPage : ContentPage
         {
             Padding = new Thickness(20),
             Children = {
-                new Label { Text = "Debug Menu", FontSize = 24, HorizontalOptions = LayoutOptions.Center },
                 new Button { Text = "Reset Game Data", Command = new Command(async () => await ResetGameData()) },
+                new Button { Text = "Enable/Disable Dark Mode", Command = new Command(async () => await DarkModeToggle()) },
             }
         };
     }
@@ -26,5 +28,12 @@ public partial class SettingsPage : ContentPage
         GameState gameState = new GameState();
         await GameStateSerializer.SaveGameStateAsync(gameState);
         await DisplayAlert("Reset Game Data", "Game data has been reset.", "OK");
+    }
+
+    private async Task DarkModeToggle()
+    {
+        AppTheme appTheme = Application.Current.RequestedTheme;
+        if (appTheme == AppTheme.Dark) { Application.Current.UserAppTheme = AppTheme.Light; Preferences.Default.Set("IsDarkMode", false); }
+        else { Application.Current.UserAppTheme = AppTheme.Dark; Preferences.Default.Set("IsDarkMode", true); };
     }
 }

@@ -7,8 +7,6 @@
         <Style TargetType="Frame">
             <Setter Property="BorderColor" Value="Gray" />
             <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="HasShadow" Value="True" />
         </Style>
         <Style TargetType="Label">
             <Setter Property="HorizontalOptions" Value="Center" />
@@ -16,19 +14,13 @@
             <Setter Property="FontSize" Value="15" />
             <Setter Property="TextColor" Value="Black" />
         </Style>
-        <Style TargetType="Button">
-            <Setter Property="MinimumWidthRequest" Value="40" />
-            <Setter Property="MinimumHeightRequest" Value="40" />
-            <Setter Property="BackgroundColor" Value="#007ACC" />
-            <Setter Property="TextColor" Value="White" />
-            <Setter Property="CornerRadius" Value="5" />
-        </Style>
         <Style TargetType="ImageButton">
             <Setter Property="WidthRequest" Value="40" />
             <Setter Property="HeightRequest" Value="40" />
             <Setter Property="BackgroundColor" Value="Transparent" />
         </Style>
     </ContentPage.Resources>
+
 
     <ScrollView>
         <Grid RowSpacing="10" ColumnSpacing="10" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">

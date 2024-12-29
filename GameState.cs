@@ -19,6 +19,8 @@ namespace Project2A
         public int TotalGuesses { get; set; } = 0;
         public int ItemLCount { get; set; } = 0;
         public int ItemRCount { get; set; } = 0;
+
+        public int AppTheme = 0;
         public GameState()
         {
             for (int i = 0; i < 30; i++)
